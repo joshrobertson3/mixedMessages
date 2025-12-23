@@ -15,7 +15,7 @@ console.log(dictionary.nouns[1]);
 
 console.log(dictionary.nouns[0]['nounType']);
 
-// This function generates a random number which then selects a random word from the respective array in the dictionary.
+// This function accepts a word type (noun, verb, adjective, adverb) and calls their respective getRandomWord method from the root class. It returns a "component" of a clause (i.e. it could be the word itself or a phrase like "an apple" or "must eat" - depending on the word that was returned from the getRandomWord method.)
 const assembleComponent = (wordType) => {
     let word;
     let component;

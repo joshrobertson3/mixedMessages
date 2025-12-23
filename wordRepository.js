@@ -7,6 +7,7 @@ class Root {
         this.adverbs = [];
     }
 
+//The following methods create new instances of their respective subclasses and stores them in the arrays above.
     addNoun(word, startsWithVowel, nounType) {
         const noun = new Noun(word, startsWithVowel, nounType);
         this.nouns.push(noun);
@@ -31,6 +32,7 @@ class Root {
         return adverb;
     }
 
+// The following methods returns a random object from their respective arrays from this class.
     getRandomNoun() {
         let randomIndex = Math.floor(Math.random() * this.nouns.length);
         return this.nouns[randomIndex];
