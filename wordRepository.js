@@ -4,12 +4,11 @@ class Root {
         this.nouns = [];
         this.verbs = [];
         this.adjectives = [];
-        this.adverbs = [];
     }
 
 //The following methods create new instances of their respective subclasses and stores them in the arrays above.
-    addNoun(word, startsWithVowel, nounType) {
-        const noun = new Noun(word, startsWithVowel, nounType);
+    addNoun(word, startsWithVowel, nounType, nominative, oblique, person) {
+        const noun = new Noun(word, startsWithVowel, nounType, nominative, oblique, person);
         this.nouns.push(noun);
         return noun;
     }
@@ -20,16 +19,10 @@ class Root {
         return verb;
     }
     
-    addAdjective(word) {
-        const adjective = new Adjective(word);
+    addAdjective(word, startsWithVowel) {
+        const adjective = new Adjective(word, startsWithVowel);
         this.adjectives.push(adjective);
         return adjective;
-    }
-
-    addAdverb(word) {
-        const adverb = new Adverb(word)
-        this.adverbs.push(adverb);
-        return adverb;
     }
 
 // The following methods returns a random object from their respective arrays from this class.
@@ -47,11 +40,6 @@ class Root {
         let randomIndex = Math.floor(Math.random() * this.adjectives.length);
         return this.adjectives[randomIndex];
     }
-
-    getRandomAdverb() {
-        let randomIndex = Math.floor(Math.random() * this.adverbs.length);
-        return this.adverbs[randomIndex];
-    }
 }
 
 //This parent class is shared for all words.
@@ -63,10 +51,13 @@ class Word {
 
 //These child classes extend Word and are used for their respective word types.
 class Noun extends Word {
-    constructor(word, startsWithVowel, nounType) {
+    constructor(word, startsWithVowel, nounType, nominative, oblique, person) {
         super(word);
         this.startsWithVowel = startsWithVowel;
         this.nounType = nounType;
+        this.nominative = nominative;
+        this.oblique = oblique;
+        this.person = person
     }
 }
 
@@ -79,14 +70,9 @@ class Verb extends Word {
 }
 
 class Adjective extends Word {
-    constructor(word) {
+    constructor(word, startsWithVowel) {
         super(word);
-    }
-}
-
-class Adverb extends Word {
-    constructor(word) {
-        super(word);
+        this.startsWithVowel = startsWithVowel;
     }
 }
 

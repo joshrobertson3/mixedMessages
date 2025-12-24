@@ -1,59 +1,42 @@
 // Importing classes from wordRepository.js
 import Root from "./wordRepository.js";
+export const dictionary = new Root();
+import assembleComponent from "./assemblers.js";
 
-const dictionary = new Root();
-
-const book = dictionary.addNoun("book", false, "substantive");
-const dog = dictionary.addNoun("dog", false, "substantive");
-const apple = dictionary.addNoun("apple", true, "substantive");
+const book = dictionary.addNoun("book", false, "substantive", "book", "book", 'third');
+const dog = dictionary.addNoun("dog", false, "substantive", "dog", "dog", 'third');
+const apple = dictionary.addNoun("apple", true, "substantive", "apple", "apple", 'third');
 const must = dictionary.addVerb('must', 'modal');
 const eat = dictionary.addVerb('eat', 'regular');
+const should = dictionary.addVerb('should', 'modal');
+const can = dictionary.addVerb('can', 'modal');
+const supply = dictionary.addVerb('supply', 'regular');
+const cook = dictionary.addVerb('cook', 'regular');
+const open = dictionary.addVerb('open', 'regular');
+const sit = dictionary.addVerb('sit', 'regular');
+const he = dictionary.addNoun('he', false, 'pronoun', 'he', 'him', 'third');
+const she = dictionary.addNoun('she', false, 'pronoun', 'she', 'her', 'third');
+const I = dictionary.addNoun('I', true, 'pronoun', 'I', 'me', 'first');
+const you = dictionary.addNoun('you', false, 'pronoun', 'you', 'you', 'second');
+const we = dictionary.addNoun('we', false, 'pronoun', 'we', 'us', 'first');
+const happy = dictionary.addAdjective('happy', false);
+const sad = dictionary.addAdjective('sad', false);
+const big = dictionary.addAdjective('big', false);
+const awesome = dictionary.addAdjective('awesome', true);
+const ugly = dictionary.addAdjective('ugly', true);
+const good = dictionary.addAdjective('good', false);
+const old = dictionary.addAdjective('olg', true);
 
-console.log(dictionary);
-console.log(dictionary.nouns[0]);
-console.log(dictionary.nouns[1]);
+//console.log(dictionary);
+console.log(dictionary.nouns);
+//console.log(dictionary.nouns[1]);
 
 console.log(dictionary.nouns[0]['nounType']);
+console.log(dictionary.nouns[3]['nominative']);
 
-// This function accepts a word type (noun, verb, adjective, adverb) and calls their respective getRandomWord method from the root class. It returns a "component" of a clause (i.e. it could be the word itself or a phrase like "an apple" or "must eat" - depending on the word that was returned from the getRandomWord method.)
-const assembleComponent = (wordType) => {
-    let word;
-    let component;
-    switch (wordType) {
-        case 'noun':
-            word = dictionary.getRandomNoun();
-            if (word['startsWithVowel']) {
-                component = `an ${word['word']}`;
-            } else {
-                component = `a ${word['word']}`;
-            }
-            break;
-        case 'verb':
-            word = dictionary.getRandomVerb();
-            if (word['verbType'] === 'modal') {
-                let additionalVerb;
-                do {
-                    additionalVerb = dictionary.getRandomVerb();
-                    console.log('Additional Verb: ' + additionalVerb['word']);
-                } while (additionalVerb['verbType'] === 'modal');
-                component = word['word'] + ' ' + additionalVerb['word'];
-            } else {
-                component = word['word'];
-            }
-            break;
-        case 'adjective':
-            word = dictionary.getRandomAdjective();
-            component = word['word'];
-            break;
-        case 'adverb':
-            word = dictionary.getRandomAdverb();
-            component = word['word'];
-            break;
-        default:
-            throw new Error('wordType is invalid');
-    }
-    return component;
-}
 
-console.log(assembleComponent('noun'));
+
+console.log(assembleComponent('subject'));
 console.log(assembleComponent('verb'));
+console.log(assembleComponent('object'));
+
