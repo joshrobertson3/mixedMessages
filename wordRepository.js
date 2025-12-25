@@ -36,7 +36,7 @@ class Root {
         return this.verbs[randomIndex];
     }
 
-    getRandomAdjectvive() {
+    getRandomAdjective() {
         let randomIndex = Math.floor(Math.random() * this.adjectives.length);
         return this.adjectives[randomIndex];
     }
