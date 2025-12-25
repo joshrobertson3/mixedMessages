@@ -29,7 +29,7 @@ const assembleNoun = sentenceComponent => {
 }
 
 //Returns the verb of a sentence either as a regular verb or as a modal verb combination. NEED TO ADD IN DECLINED VERB FOR 3RD PERSON.
-const assembleVerb = () => {
+const assembleVerb = (person) => { // THIS NOW ACCEPTS AN ARGUMENT FOR PERSON. SEE COMMENT BELOW
     let component;
     let verbObj = dictionary.getRandomVerb();
     if (verbObj['verbType'] === 'modal') {
@@ -39,13 +39,21 @@ const assembleVerb = () => {
             //console.log('Additional Verb: ' + additionalVerb['word']);
         } while (additionalVerb['verbType'] === 'modal');
         component = verbObj['word'] + ' ' + additionalVerb['word'];
+    } else if (person === 'third') {
+        component = verbObj['thirdPerson']; // I'VE NOW ADDED THE THIRD PERSON AS AN OPTION
     } else {
         component = verbObj['word'];
     }
     return component;
 }
 
-// This function unifies all functions above. But is also kinda pointless. Should create a function that assembles the clause + chooses whether there should be a dependent clause too (in which case I need conjunctions).
+//console.log(assembleVerb('third'));
+
+// I'm going to create a new clause assembler function that calls the assembleNoun('subject') first and whatever is returned will say what person it's in. That 'person' will then be used as an argument to call the assembleVerb(person) function above. It must be done in that order. Then it will call the object and assemble the clause as a single stirng and capitalise the first letter.
+
+// If I'm going to add dependent clauses as an option, then I need a new class of conjunction words and build into the clause assembler function a way to generate dependent clauses randomly.
+
+//  TO DEPRECATE. This function unifies all functions above. But is also kinda pointless. Should create a function that assembles the clause + chooses whether there should be a dependent clause too (in which case I need conjunctions).
 const assembleComponent = (sentenceComponent) => {
     let component;
     switch (sentenceComponent) {
@@ -58,7 +66,7 @@ const assembleComponent = (sentenceComponent) => {
             break;
 
         case 'verb':
-            component = assembleVerb();
+            component = assembleVerb('third');
             break;
 
         default:
@@ -68,3 +76,7 @@ const assembleComponent = (sentenceComponent) => {
 }
 
 export default assembleComponent;
+
+console.log(assembleComponent('subject'));
+console.log(assembleComponent('verb'));
+console.log(assembleComponent('object'));

@@ -13,8 +13,8 @@ class Root {
         return noun;
     }
 
-    addVerb(word, verbType) {
-        const verb = new Verb(word, verbType)
+    addVerb(word, verbType, thirdPerson) {
+        const verb = new Verb(word, verbType, thirdPerson)
         this.verbs.push(verb);
         return verb;
     }
@@ -63,9 +63,10 @@ class Noun extends Word {
 
 
 class Verb extends Word {
-    constructor(word, verbType) {
+    constructor(word, verbType, thirdPerson) {
         super(word);
         this.verbType = verbType;
+        this.thirdPerson = thirdPerson;
     }
 }
 
