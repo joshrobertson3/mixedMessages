@@ -10,7 +10,7 @@ const assembleNoun = sentenceComponent => {
     } else if (nounObj['nounType'] === 'pronoun' && sentenceComponent === 'object') {
         component = nounObj['oblique']
     } else {
-        if (Math.floor(Math.random() * 1) === 0) { 
+        if (Math.floor(Math.random() * 2) === 0) { 
             let adjObj = dictionary.getRandomAdjectvive();
             if (adjObj['startsWithVowel']) {
                 component = `an ${adjObj['word']} ${nounObj['word']}`
