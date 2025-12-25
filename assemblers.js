@@ -1,4 +1,4 @@
-import { dictionary } from "./main.js";
+import dictionary from "./dictionary.js";
 
 // Returns the subject/object of a sentence with either a random adjective attached or not
 const assembleNoun = sentenceComponent => {

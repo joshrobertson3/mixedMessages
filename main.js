@@ -1,6 +1,5 @@
 // Importing classes from wordRepository.js
-import Root from "./wordRepository.js";
-export const dictionary = new Root();
+import dictionary from "./dictionary.js"
 import assembleClause from "./assemblers.js";
 
 const book = dictionary.addNoun("book", false, "substantive", "book", "book", 'third');
