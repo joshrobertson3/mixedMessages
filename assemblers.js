@@ -49,34 +49,25 @@ const assembleVerb = (person) => { // THIS NOW ACCEPTS AN ARGUMENT FOR PERSON. S
 
 //console.log(assembleVerb('third'));
 
-// I'm going to create a new clause assembler function that calls the assembleNoun('subject') first and whatever is returned will say what person it's in. That 'person' will then be used as an argument to call the assembleVerb(person) function above. It must be done in that order. Then it will call the object and assemble the clause as a single stirng and capitalise the first letter.
 
 // If I'm going to add dependent clauses as an option, then I need a new class of conjunction words and build into the clause assembler function a way to generate dependent clauses randomly.
 
-//  TO DEPRECATE. This function unifies all functions above. But is also kinda pointless. Should create a function that assembles the clause + chooses whether there should be a dependent clause too (in which case I need conjunctions).
-const assembleComponent = (sentenceComponent) => {
-    let component;
-    switch (sentenceComponent) {
-        case 'subject':
-            component = assembleNoun('subject');
-            break;
-        
-        case 'object':
-            component = assembleNoun('object');
-            break;
-
-        case 'verb':
-            component = assembleVerb('third');
-            break;
-
-        default:
-            throw new Error('sentenceComponent is invalid');
-    }
-    return component;
+// Determines make up of a clause, calls relevant functions to get each component and assembles them into one string with punctuation marks.
+const assembleClause = () => {
+    let subjectObj = assembleNoun('subject');
+    //console.log('subjectObj[component] = ' + subjectObj['component']);
+    //console.log('subjectObj[person] = ' + subjectObj['person']);
+    let verb = assembleVerb(subjectObj['person']);
+    let objectObj = assembleNoun('object');
+    let string = subjectObj['component'] + ' ' + verb + ' ' + objectObj['component'] + '.';
+    let firstLetter = string.at(0);
+    let clause = firstLetter.toUpperCase() + string.substring(1);
+    return clause;
 }
 
-export default assembleComponent;
 
-console.log(assembleComponent('subject'));
-console.log(assembleComponent('verb'));
-console.log(assembleComponent('object'));
+//console.log(assembleClause());
+
+export default assembleClause;
+
+
