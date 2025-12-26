@@ -4,6 +4,7 @@ class Root {
         this.nouns = [];
         this.verbs = [];
         this.adjectives = [];
+        //Create this.prepositions, this.conjunctions, this.adverbs.
     }
 
 //The following methods create new instances of their respective subclasses and stores them in the arrays above.
@@ -13,7 +14,7 @@ class Root {
         return noun;
     }
 
-    addVerb(word, verbType, thirdPerson) {
+    addVerb(word, verbType, thirdPerson) { // add first and second person to allow for "to be" verbs and other constructions.
         const verb = new Verb(word, verbType, thirdPerson)
         this.verbs.push(verb);
         return verb;
@@ -40,6 +41,8 @@ class Root {
         let randomIndex = Math.floor(Math.random() * this.adjectives.length);
         return this.adjectives[randomIndex];
     }
+
+    // The getRandomAdverb method will accept an argument for adverbType - that way it can select the appropriate adverb for its use case in a sentence.
 }
 
 //This parent class is shared for all words.
@@ -63,7 +66,7 @@ class Noun extends Word {
 
 
 class Verb extends Word {
-    constructor(word, verbType, thirdPerson) {
+    constructor(word, verbType, thirdPerson) { // add first and second person forms.
         super(word);
         this.verbType = verbType;
         this.thirdPerson = thirdPerson;

@@ -28,8 +28,8 @@ const assembleNoun = sentenceComponent => {
     return { component, person }
 }
 
-//Returns the verb of a sentence either as a regular verb or as a modal verb combination. NEED TO ADD IN DECLINED VERB FOR 3RD PERSON.
-const assembleVerb = (person) => { // THIS NOW ACCEPTS AN ARGUMENT FOR PERSON. SEE COMMENT BELOW
+//Returns the verb of a sentence either as a regular verb or as a modal verb combination. TODO: Add in first and second person (to allow for "to be" verb + future expansion for other constructions)
+const assembleVerb = (person) => { 
     let component;
     let verbObj = dictionary.getRandomVerb();
     if (verbObj['verbType'] === 'modal') {
@@ -40,7 +40,7 @@ const assembleVerb = (person) => { // THIS NOW ACCEPTS AN ARGUMENT FOR PERSON. S
         } while (additionalVerb['verbType'] === 'modal');
         component = verbObj['word'] + ' ' + additionalVerb['word'];
     } else if (person === 'third') {
-        component = verbObj['thirdPerson']; // I'VE NOW ADDED THE THIRD PERSON AS AN OPTION
+        component = verbObj['thirdPerson']; 
     } else {
         component = verbObj['word'];
     }
