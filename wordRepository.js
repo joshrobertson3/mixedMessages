@@ -1,3 +1,5 @@
+const vowels = ['A', 'E', 'I', 'O', 'U']
+
 //This class acts as the entry point for all data - the root of all data nodes. All new instances are created using methods within this class.
 class Root {
     constructor() {
@@ -8,8 +10,8 @@ class Root {
     }
 
 //The following methods create new instances of their respective subclasses and stores them in the arrays above.
-    addNoun(word, startsWithVowel, nounType, nominative, oblique, person) {
-        const noun = new Noun(word, startsWithVowel, nounType, nominative, oblique, person);
+    addNoun(word, nounType, nominative, oblique, person) {
+        const noun = new Noun(word, nounType, nominative, oblique, person);
         this.nouns.push(noun);
         return noun;
     }
@@ -20,8 +22,8 @@ class Root {
         return verb;
     }
     
-    addAdjective(word, startsWithVowel) {
-        const adjective = new Adjective(word, startsWithVowel);
+    addAdjective(word) {
+        const adjective = new Adjective(word);
         this.adjectives.push(adjective);
         return adjective;
     }
@@ -54,13 +56,17 @@ class Word {
 
 //These child classes extend Word and are used for their respective word types.
 class Noun extends Word {
-    constructor(word, startsWithVowel, nounType, nominative, oblique, person) {
+    constructor(word, nounType, nominative, oblique, person) {
         super(word);
-        this.startsWithVowel = startsWithVowel;
         this.nounType = nounType;
         this.nominative = nominative;
         this.oblique = oblique;
         this.person = person
+        if (vowels.includes(this.word.at(0).toUpperCase())) {
+            this.startsWithVowel = true;
+        } else {
+            this.startsWithVowel = false;
+        }
     }
 
     renderNoun(caseType, adjRequired) { //Add articleType as arg to render with the correct indefinite article or definite article - this returns either a string with the article or one without (for use with adjectives)
@@ -98,9 +104,13 @@ class Verb extends Word {
 }
 
 class Adjective extends Word {
-    constructor(word, startsWithVowel) {
+    constructor(word) {
         super(word);
-        this.startsWithVowel = startsWithVowel;
+        if (vowels.includes(this.word.at(0).toUpperCase())) {
+            this.startsWithVowel = true;
+        } else {
+            this.startsWithVowel = false;
+        }
     }
 
     renderAdjective() { // Similar to renderNoun() - add articleType to add indefinite vs definite articles.
