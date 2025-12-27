@@ -39,7 +39,6 @@ const assembleVerb = person => {
 
 //console.log(assembleVerb('third'));
 
-
 // If I'm going to add dependent clauses as an option, then I need a new class of conjunction words and build into the clause assembler function a way to generate dependent clauses randomly.
 
 // Determines make up of a clause, calls relevant functions to get each component and assembles them into one string with punctuation marks.
@@ -54,7 +53,6 @@ const assembleClause = () => {
     let clause = firstLetter.toUpperCase() + string.substring(1);
     return clause;
 }
-
 
 //console.log(assembleClause());
 
