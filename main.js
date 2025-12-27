@@ -1,6 +1,7 @@
 // Importing classes from wordRepository.js
 import dictionary from "./dictionary.js"
 import assembleClause from "./assemblers.js";
+import { assembleNoun } from "./assemblers.js"
 
 const book = dictionary.addNoun("book", false, "substantive", "book", "book", 'third');
 const dog = dictionary.addNoun("dog", false, "substantive", "dog", "dog", 'third');
@@ -34,4 +35,9 @@ console.log(dictionary.nouns[0]['nounType']);
 console.log(dictionary.nouns[3]['nominative']);
 */
 
-console.log(assembleClause());
+//console.log(dictionary.getRandomNoun());
+//console.log(dictionary.getRandomNoun().renderNoun('subject'));
+console.log(assembleNoun('object'));
+//console.log(we.renderNoun('object'));
+
+//console.log(assembleClause());

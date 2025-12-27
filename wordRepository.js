@@ -62,6 +62,22 @@ class Noun extends Word {
         this.oblique = oblique;
         this.person = person
     }
+
+    renderNoun(caseType, adjRequired) { //Add articleType as arg to render with "an"/"a"/"the" - this returns two strings, one with the article and one without (for use with adjectives)
+        if (this.nounType === 'pronoun' && caseType === 'subject') {
+            return this.nominative;
+        } else if (this.nounType === 'pronoun' && caseType === 'object') {
+            return this.oblique;
+        } else if (!adjRequired) {
+            if (this.startsWithVowel) {
+                return `an ${this.word}`;
+            } else {
+                return `a ${this.word}`
+            }
+        } else {
+            return this.word; //returns unconcat word for concat with adj by assembleNoun()
+        }
+    }
 }
 
 
@@ -77,6 +93,14 @@ class Adjective extends Word {
     constructor(word, startsWithVowel) {
         super(word);
         this.startsWithVowel = startsWithVowel;
+    }
+
+    renderAdjective() {
+        if (this.startsWithVowel) {
+            return `an ${this.word}`;
+        } else {
+            return `a ${this.word}`;
+        }
     }
 }
 

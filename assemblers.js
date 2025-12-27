@@ -1,31 +1,23 @@
 import dictionary from "./dictionary.js";
 
 // Returns the subject/object of a sentence with either a random adjective attached or not
-const assembleNoun = sentenceComponent => {
+export const assembleNoun = caseType => {
+    //console.log("with new method: " + dictionary.getRandomNoun().renderNoun('object'));
     let component;
     let nounObj = dictionary.getRandomNoun();
+    //return nounObj;
+    //return nounObj.renderNoun(caseType);
     let person = nounObj['person'];
-    if (nounObj['nounType'] === 'pronoun' && sentenceComponent === 'subject') {
-        component = nounObj['nominative']
-    } else if (nounObj['nounType'] === 'pronoun' && sentenceComponent === 'object') {
-        component = nounObj['oblique']
+    let adjRequired = (Math.random() < 0.5) ? true : false;
+    let noun = nounObj.renderNoun(caseType, adjRequired)
+    //console.log(adjRequired);
+    if (adjRequired && nounObj['nounType'] !== 'pronoun') {
+        let adjective = dictionary.getRandomAdjective();
+        component = adjective.renderAdjective() + ' ' + noun;
     } else {
-        if (Math.floor(Math.random() * 2) === 0) { 
-            let adjObj = dictionary.getRandomAdjective();
-            if (adjObj['startsWithVowel']) {
-                component = `an ${adjObj['word']} ${nounObj['word']}`
-            } else {
-                component = `a ${adjObj['word']} ${nounObj['word']}`
-            }
-        } else {
-            if (nounObj['startsWithVowel']) {
-                component = `an ${nounObj['word']}`;
-            } else {
-                component = `a ${nounObj['word']}`;
-            }
-        }
+        component = noun;
     }
-    return { component, person }
+    return { component, person };
 }
 
 //Returns the verb of a sentence either as a regular verb or as a modal verb combination. TODO: Add in first and second person (to allow for "to be" verb + future expansion for other constructions)
