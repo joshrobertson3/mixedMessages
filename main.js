@@ -1,6 +1,7 @@
 // Importing classes from wordRepository.js
 import dictionary from "./dictionary.js"
 import assembleClause from "./assemblers.js";
+import { assembleVerb } from "./assemblers.js";
 
 const book = dictionary.addNoun("book", false, "substantive", "book", "book", 'third');
 const dog = dictionary.addNoun("dog", false, "substantive", "dog", "dog", 'third');
@@ -12,12 +13,18 @@ const can = dictionary.addVerb('can', 'modal', 'can');
 const supply = dictionary.addVerb('supply', 'regular', 'supplies');
 const cook = dictionary.addVerb('cook', 'regular', 'cooks');
 const open = dictionary.addVerb('open', 'regular', 'opens');
-const sit = dictionary.addVerb('sit', 'regular', 'sits');
+//const sit = dictionary.addVerb('sit', 'regular', 'sits');
+const read = dictionary.addVerb('read', 'regular', 'reads');
+const clean = dictionary.addVerb('clean', 'regular', 'cleans');
+const might = dictionary.addVerb('must', 'modal', 'might');
+const may = dictionary.addVerb('may', 'modal', 'may');
+const could = dictionary.addVerb('could', 'modal', 'could');
 const he = dictionary.addNoun('he', false, 'pronoun', 'he', 'him', 'third');
 const she = dictionary.addNoun('she', false, 'pronoun', 'she', 'her', 'third');
 const I = dictionary.addNoun('I', true, 'pronoun', 'I', 'me', 'first');
 const you = dictionary.addNoun('you', false, 'pronoun', 'you', 'you', 'second');
 const we = dictionary.addNoun('we', false, 'pronoun', 'we', 'us', 'first');
+const they = dictionary.addNoun('they', false, 'pronoun', 'they', 'them', 'thirdPerson');
 const happy = dictionary.addAdjective('happy', false);
 const sad = dictionary.addAdjective('sad', false);
 const big = dictionary.addAdjective('big', false);
@@ -25,6 +32,9 @@ const awesome = dictionary.addAdjective('awesome', true);
 const ugly = dictionary.addAdjective('ugly', true);
 const good = dictionary.addAdjective('good', false);
 const old = dictionary.addAdjective('old', true);
+const tall = dictionary.addAdjective('tall', false);
+const short = dictionary.addAdjective('short', false);
+const nice = dictionary.addAdjective('nice', false);
 
 /*
 console.log(dictionary);
@@ -39,4 +49,6 @@ console.log(dictionary.nouns[3]['nominative']);
 //console.log(assembleNoun('object'));
 //console.log(we.renderNoun('object'));
 
+//console.log(eat.renderVerb('firstPerson'));
+//console.log(assembleVerb('thirdPerson'));
 console.log(assembleClause());

@@ -9,7 +9,7 @@ const assembleNoun = caseType => {
     //return nounObj.renderNoun(caseType);
     let person = nounObj['person'];
     let adjRequired = (Math.random() < 0.5) ? true : false;
-    let noun = nounObj.renderNoun(caseType, adjRequired)
+    let noun = nounObj.renderNoun(caseType, adjRequired);
     //console.log(adjRequired);
     if (adjRequired && nounObj['nounType'] !== 'pronoun') {
         let adjective = dictionary.getRandomAdjective();
@@ -17,11 +17,16 @@ const assembleNoun = caseType => {
     } else {
         component = noun;
     }
+    console.log(
+        `[${new Date().toISOString()}]`,
+        `Action: assembleNoun(${caseType})`,
+        `result: { component: ${component}, person: ${person} }`
+    );
     return { component, person };
 }
 
 //Returns the verb of a sentence either as a regular verb or as a modal verb combination. TODO: Add in first and second person (to allow for "to be" verb + future expansion for other constructions)
-const assembleVerb = person => { 
+export const assembleVerb = person => { 
     let component;
     let verbObj = dictionary.getRandomVerb();
     if (verbObj['verbType'] === 'modal') {
@@ -30,10 +35,15 @@ const assembleVerb = person => {
             additionalVerb = dictionary.getRandomVerb();
             //console.log('Additional Verb: ' + additionalVerb['word']);
         } while (additionalVerb['verbType'] === 'modal');
-        component = verbObj.renderVerb() + ' ' + additionalVerb.renderVerb();
+        component = verbObj.renderVerb('firstPerson') + ' ' + additionalVerb.renderVerb('firstPerson');
     } else {
-        component = verbObj.renderVerb();
+        component = verbObj.renderVerb(person);
     }
+    console.log(
+        `[${new Date().toISOString()}]`,
+        `Action: assembleVerb(${person})`,
+        `result: component = ${component}`
+    );
     return component;
 }
 

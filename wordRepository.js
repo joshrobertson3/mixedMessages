@@ -88,8 +88,8 @@ class Verb extends Word {
         this.thirdPerson = thirdPerson;
     }
 
-    renderVerb() {
-        if (this.verbType === 'thirdPerson') {
+    renderVerb(person) {
+        if (person === 'third') {
             return this.thirdPerson;
         } else {
             return this.word;
