@@ -1,7 +1,7 @@
 import dictionary from "./dictionary.js";
 
 // Returns the subject/object of a sentence with either a random adjective attached or not
-export const assembleNoun = caseType => {
+const assembleNoun = caseType => {
     //console.log("with new method: " + dictionary.getRandomNoun().renderNoun('object'));
     let component;
     let nounObj = dictionary.getRandomNoun();
