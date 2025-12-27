@@ -87,6 +87,14 @@ class Verb extends Word {
         this.verbType = verbType;
         this.thirdPerson = thirdPerson;
     }
+
+    renderVerb() {
+        if (this.verbType === 'thirdPerson') {
+            return this.thirdPerson;
+        } else {
+            return this.word;
+        }
+    }
 }
 
 class Adjective extends Word {

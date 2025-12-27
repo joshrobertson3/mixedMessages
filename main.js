@@ -37,7 +37,7 @@ console.log(dictionary.nouns[3]['nominative']);
 
 //console.log(dictionary.getRandomNoun());
 //console.log(dictionary.getRandomNoun().renderNoun('subject'));
-console.log(assembleNoun('object'));
+//console.log(assembleNoun('object'));
 //console.log(we.renderNoun('object'));
 
-//console.log(assembleClause());
+console.log(assembleClause());

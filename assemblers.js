@@ -21,7 +21,7 @@ export const assembleNoun = caseType => {
 }
 
 //Returns the verb of a sentence either as a regular verb or as a modal verb combination. TODO: Add in first and second person (to allow for "to be" verb + future expansion for other constructions)
-const assembleVerb = (person) => { 
+const assembleVerb = person => { 
     let component;
     let verbObj = dictionary.getRandomVerb();
     if (verbObj['verbType'] === 'modal') {
@@ -30,11 +30,9 @@ const assembleVerb = (person) => {
             additionalVerb = dictionary.getRandomVerb();
             //console.log('Additional Verb: ' + additionalVerb['word']);
         } while (additionalVerb['verbType'] === 'modal');
-        component = verbObj['word'] + ' ' + additionalVerb['word'];
-    } else if (person === 'third') {
-        component = verbObj['thirdPerson']; 
+        component = verbObj.renderVerb() + ' ' + additionalVerb.renderVerb();
     } else {
-        component = verbObj['word'];
+        component = verbObj.renderVerb();
     }
     return component;
 }
