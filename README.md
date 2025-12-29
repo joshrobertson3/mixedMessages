@@ -1,5 +1,4 @@
 # Mixed Messages
----
 
 #### Summary
 A JavaScript-based sentence generator that leverages object-oriented programming to create grammatically coherent, randomised sentences.
