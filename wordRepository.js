@@ -1,4 +1,4 @@
-const vowels = ['A', 'E', 'I', 'O', 'U']
+const vowels = ['A', 'E', 'I', 'O', 'U'];
 
 //This class acts as the entry point for all data - the root of all data nodes. All new instances are created using methods within this class.
 class Root {
