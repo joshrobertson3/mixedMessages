@@ -49,6 +49,6 @@ I will be extending this project to include the following:
 - Build a SQL database to store words used for easy retrival,
 - Create a widget to display a random sentence at various times of the day.
 
-This is my very first end-to-end project in JavaScript. I only started learning to code in May 2025 :smiley:
+This is my very first end-to-end project in JavaScript. :smiley:
 
 I'm keen to continue building on this project as I continue my journey!
