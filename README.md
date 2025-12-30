@@ -5,7 +5,7 @@ A JavaScript-based sentence generator that leverages object-oriented programming
 
 #### Purpose
 
-The purpose of this project is to create a fully randomised by gramatically coherent sentence that consists of a subject, verb and object. The verb can either be regular or modal (i.e. modal + auxilliary) but it must agree gramatically with the subject.
+The purpose of this project is to create a fully randomised but gramatically coherent sentence that consists of a subject, verb and object. The verb can either be regular or modal (i.e. modal + auxilliary) but it must agree gramatically with the subject.
 
 It also randomly adds adjectives before nouns. Articles also need to agree with the adjective/noun that follows it.
 
@@ -33,7 +33,7 @@ This program is split into the following files:
 ##### Main
 - Imports all relevant classes and functions,
 - Allows the user to add words by using methods from the Root to create instances of the Nouns, Verbs and Adjectives subclasses, and 
-- Orchestrates the entire program by calling assembleClause()/
+- Orchestrates the entire program by calling assembleClause().
 
 -------
 
