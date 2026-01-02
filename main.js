@@ -1,33 +1,35 @@
 // Importing classes from wordRepository.js
 import dictionary from "./dictionary.js"
-import complexSentence from "./assemblers.js";
+import newParagraph from "./assemblers.js";
+import { assembleNoun, assembleVerb, independentClause, compoundSentence } from "./assemblers.js";
 
-const book = dictionary.addNoun("book", "substantive", "book", "book", 'third');
-const dog = dictionary.addNoun("dog", "substantive", "dog", "dog", 'third');
-const apple = dictionary.addNoun("apple", "substantive", "apple", "apple", 'third');
-const he = dictionary.addNoun('he', 'pronoun', 'he', 'him', 'third');
-const she = dictionary.addNoun('she', 'pronoun', 'she', 'her', 'third');
-const I = dictionary.addNoun('I', 'pronoun', 'I', 'me', 'first');
-const you = dictionary.addNoun('you', 'pronoun', 'you', 'you', 'second');
-const we = dictionary.addNoun('we', 'pronoun', 'we', 'us', 'first');
-const they = dictionary.addNoun('they', 'pronoun', 'they', 'them', 'plural');
-const man = dictionary.addNoun('man', 'substantive', 'man', 'man', 'third');
-const woman = dictionary.addNoun("woman", "substantive", "woman", "woman", 'third');
-const cat = dictionary.addNoun("cat", "substantive", "cat", "cat", 'third');
-const chef = dictionary.addNoun("chef", "substantive", "chef", "chef", 'third');
-const fox = dictionary.addNoun("fox", "substantive", "fox", "fox", 'third');
-const child = dictionary.addNoun("child", "substantive", "child", "child", 'third');
-const peacock = dictionary.addNoun('peacock', 'substantive', 'peacock', 'peacock', 'third');
-const lion = dictionary.addNoun('lion', 'substantive', 'lion', 'lion', 'third');
-const potato = dictionary.addNoun('potato', 'substantive', 'potato', 'potato', 'third');
-const turkey = dictionary.addNoun('turkey', 'substantive', 'turkey', 'turkey', 'third');
-const pigeon = dictionary.addNoun('pigeon', 'substantive', 'pigeon', 'pigeon', 'third');
-const player = dictionary.addNoun('player', 'substantive', 'player', 'player', 'third');
-const donkey = dictionary.addNoun('donkey', 'substantive', 'donkey', 'donkey', 'third');
-const mouse = dictionary.addNoun('mouse', 'substantive', 'mouse', 'mouse', 'third');
-const onion = dictionary.addNoun('onion', 'substantive', 'onion', 'onion', 'third');
-const goat = dictionary.addNoun('goat', 'substantive', 'goat', 'goat', 'third');
-const cow = dictionary.addNoun('cow', 'substantive', 'cow', 'cow', 'third');
+const book = dictionary.addNoun('book', 'substantive', 'neutral', 'book', 'book', 'third');
+const dog = dictionary.addNoun('dog', 'substantive', 'neutral', 'dog', 'dog', 'third');
+const apple = dictionary.addNoun('apple', 'substantive', 'neutral', 'apple', 'apple', 'third');
+const he = dictionary.addNoun('he', 'pronoun', 'masculine', 'he', 'him', 'third');
+const she = dictionary.addNoun('she', 'pronoun', 'feminine', 'she', 'her', 'third');
+const it = dictionary.addNoun('it', 'pronoun', 'neutral', 'it', 'it', 'third')
+const I = dictionary.addNoun('I', 'pronoun', 'neutral', 'I', 'me', 'first');
+const you = dictionary.addNoun('you', 'pronoun', 'neutral', 'you', 'you', 'second');
+const we = dictionary.addNoun('we', 'pronoun', 'neutral', 'we', 'us', 'first');
+const they = dictionary.addNoun('they', 'pronoun', 'neutral', 'they', 'them', 'plural');
+const man = dictionary.addNoun('man', 'substantive', 'masculine', 'man', 'man', 'third');
+const woman = dictionary.addNoun('woman', 'substantive', 'feminine', 'woman', 'woman', 'third');
+const cat = dictionary.addNoun('cat', 'substantive', 'neutral', 'cat', 'cat', 'third');
+const chef = dictionary.addNoun('chef', 'substantive', 'neutral', 'chef', 'chef', 'third');
+const fox = dictionary.addNoun('fox', 'substantive', 'neutral', 'fox', 'fox', 'third');
+const child = dictionary.addNoun('child', 'substantive', 'neutral', 'child', 'child', 'third');
+const peacock = dictionary.addNoun('peacock', 'substantive', 'neutral', 'peacock', 'peacock', 'third');
+const lion = dictionary.addNoun('lion', 'substantive', 'neutral', 'lion', 'lion', 'third');
+const potato = dictionary.addNoun('potato', 'substantive', 'neutral', 'potato', 'potato', 'third');
+const turkey = dictionary.addNoun('turkey', 'substantive', 'neutral', 'turkey', 'turkey', 'third');
+const pigeon = dictionary.addNoun('pigeon', 'substantive', 'neutral', 'pigeon', 'pigeon', 'third');
+const player = dictionary.addNoun('player', 'substantive', 'neutral', 'player', 'player', 'third');
+const donkey = dictionary.addNoun('donkey', 'substantive', 'neutral', 'donkey', 'donkey', 'third');
+const mouse = dictionary.addNoun('mouse', 'substantive', 'neutral', 'mouse', 'mouse', 'third');
+const onion = dictionary.addNoun('onion', 'substantive', 'neutral', 'onion', 'onion', 'third');
+const goat = dictionary.addNoun('goat', 'substantive', 'neutral', 'goat', 'goat', 'third');
+const cow = dictionary.addNoun('cow', 'substantive', 'neutral', 'cow', 'cow', 'third');
 
 
 const must = dictionary.addVerb('must', 'modal', 'must');
@@ -115,4 +117,17 @@ console.log(dictionary.nouns[3]['nominative']);
 //console.log(newParagraph('random', 9, ['simple', 'compound', 'simple', 'simple', 'compound', 'compound', 'simple', 'simple', 'compound']));
 //console.log(simpleSentence());
 //console.log(dictionary.getRandomNoun());
-console.log(complexSentence());
+//console.log(complexSentence());
+//console.log(independentClause());
+
+console.log(dictionary.getSpecificWord('cat', 'noun'));
+//console.log(dependentClause());
+
+/*
+let testNoun = assembleNoun('subject');
+console.log(testNoun);
+console.log(testNoun.nounObj.person);
+
+let testVerb = assembleVerb(testNoun);
+console.log(testVerb);
+*/

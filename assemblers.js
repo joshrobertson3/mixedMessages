@@ -1,21 +1,16 @@
 import dictionary from "./dictionary.js";
-
-const randomOf2 = () => {
-    return (Math.random() < 0.5) ? true : false;
-}
+import { pickRandom, randomBoolean } from "./helperFunctions.js";
 
 // Returns the subject/object of a sentence with either a random adjective attached or not
-const assembleNoun = caseType => {
-    //console.log("with new method: " + dictionary.getRandomNoun().renderNoun('object'));
+export const assembleNoun = caseType => {
     let component;
     let nounObj = dictionary.getRandomNoun();
-    //return nounObj;
-    //return nounObj.renderNoun(caseType);
-    let person = nounObj['person'];
-    let adjRequired = randomOf2();
+    console.log(nounObj)
+    console.log(nounObj.person);
+    let adjRequired = randomBoolean();
     let noun = nounObj.renderNoun(caseType, adjRequired);
     //console.log(adjRequired);
-    if (adjRequired && nounObj['nounType'] !== 'pronoun') {
+    if (adjRequired && nounObj.nounType !== 'pronoun') {
         let adjective = dictionary.getRandomAdjective();
         component = adjective.renderAdjective() + ' ' + noun;
     } else {
@@ -24,13 +19,21 @@ const assembleNoun = caseType => {
     console.log(
         `[${new Date().toISOString()}]`,
         `Action: assembleNoun(${caseType})`,
-        `result: { component: ${component}, person: ${person} }`
+        `result: { component: ${component}, nounObj:`, nounObj.Noun, ' }'
     );
-    return { component, person };
+    return { 
+        component,
+        caseType,
+        nounObj
+    };
 }
 
-//Returns the verb of a sentence either as a regular verb or as a modal verb combination. TODO: Add in first and second person (to allow for "to be" verb + future expansion for other constructions)
-const assembleVerb = person => { 
+
+
+//Returns the verb of a sentence either as a regular verb or as a modal verb combination.
+export const assembleVerb = obj => {
+    let person = obj.nounObj.person;
+    console.log(person);
     let component;
     let verbObj = dictionary.getRandomVerb();
     if (verbObj['verbType'] === 'modal') {
@@ -45,10 +48,10 @@ const assembleVerb = person => {
     }
     console.log(
         `[${new Date().toISOString()}]`,
-        `Action: assembleVerb(${person})`,
+        `Action: assembleVerb(${obj})`,
         `result: component = ${component}`
     );
-    return component;
+    return component; //maybe return an object?
 }
 
 //console.log(assembleVerb('third'));
@@ -60,14 +63,13 @@ const formatSentence = sentence => {
     return clause;
 }
 
-// If I'm going to add dependent clauses as an option, then I need a new class of conjunction words and build into the clause assembler function a way to generate dependent clauses randomly.
-
 // Determines make up of a clause, calls relevant functions to get each component and assembles them into one string with punctuation marks.
-const independentClause = () => {
+export const independentClause = () => {
     const subjectObj = assembleNoun('subject');
+    console.log('subjectObj: ', subjectObj);
     //console.log('subjectObj[component] = ' + subjectObj['component']);
     //console.log('subjectObj[person] = ' + subjectObj['person']);
-    const verb = assembleVerb(subjectObj['person']);
+    const verb = assembleVerb(subjectObj);
     const objectObj = assembleNoun('object');
     let string = subjectObj['component'] + ' ' + verb + ' ' + objectObj['component'];
     return {
@@ -78,22 +80,53 @@ const independentClause = () => {
     };
 }
 
-const compoundSentence = () => {
-    const obj1 = independentClause();
-    const clause1 = obj1.string;
-    const obj2 = independentClause();
-    const clause2 = obj2.string;
+export const compoundSentence = () => {
+    const clauseObj1 = independentClause();
+    const clauseString1 = clauseObj1.string;
+    const clauseObj2 = independentClause();
+    const clauseString2 = clauseObj2.string;
     const conjunction = dictionary.getRandomConjunction('coordinating');
-    return clause1 + ' ' + conjunction.renderConjunction() + ' ' + clause2;
+    let string = clauseString1 + ' ' + conjunction.renderConjunction() + ' ' + clauseString2; 
+    return {
+        string,
+        clauseObj1,
+        clauseObj2,
+        conjunction
+    };
 }
 
-const dependentClause = obj => {
+
+export const dependentClause = obj => {
+    let pronoun;
+    let pronounObj;
+    if (obj.nounObj.nounType  === 'pronoun' && obj.caseType === 'subject') {
+        pronoun = obj.nounObj.nominative;
+        pronounObj = obj;
+    } else if (obj.nounObj.nounType === 'pronoun' && obj.caseType === 'object') {
+        pronoun = obj.nounObj.oblique;
+        pronounObj = obj;
+    } else {
+        pronounObj = dictionary.getSpecificWord('it', 'noun');
+        pronoun = pronounObj.word;
+    }
+    const verb = assembleVerb(pronounObj);
+
+    // TO DO - Finish building this function. To determine whether there should be multiple types of dependent clauses. Refer to https://en.wikipedia.org/wiki/Dependent_clause
     
+    // Tossing between incorporating adverbial clauses here + other dependent clause types. Will this impact how I plan to add adverbs in? Might be good to have this plus inserting adverb in independent clause. Having it in a dependent clause gives emphasis.
 }
+
 
 const complexSentence = () => {
     const independentObj = independentClause();
-    const dependentObj = dependentClause();
+    // Determines what dependentClause should depend on (i.e. whether the subject or the object of the independentClause)
+    let focusObj;
+    if (randomBoolean()) {
+        focusObj = independentObj.subjectObj;
+     } else {
+        focusObj = independentObj.objectObj;
+     } 
+    const dependentObj = dependentClause(focusObj.nounObj);
     const conjunction = dictionary.getRandomConjunction('subordinating');
     console.log(
         `independentObj:  ${independentObj}`,
@@ -101,8 +134,9 @@ const complexSentence = () => {
         `conjunction: ${conjunction}`
     )
     
-}
+    // NEED to finish building this function. Need to finish building dependentClause() first before finishing this function.
 
+}
 
 const newParagraph = (theme, numberOfClauses, sentenceTypes = []) => { // Object factory
     let _clauses = [];
@@ -152,6 +186,6 @@ const newParagraph = (theme, numberOfClauses, sentenceTypes = []) => { // Object
 
 
 
-export default complexSentence;
+export default newParagraph;
 
 

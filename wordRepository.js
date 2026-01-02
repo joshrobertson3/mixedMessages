@@ -1,9 +1,6 @@
-const vowels = ['A', 'E', 'I', 'O', 'U'];
+import { pickRandom, randomBoolean, filterByWord } from "./helperFunctions.js";
 
-const pickRandom = arr => {
-    const randIndex = Math.floor(Math.random() * arr.length);
-    return arr[randIndex];
-}
+const vowels = ['A', 'E', 'I', 'O', 'U'];
 
 //This class acts as the entry point for all data - the root of all data nodes. All new instances are created using methods within this class.
 class Root {
@@ -17,8 +14,8 @@ class Root {
     }
 
 //The following methods create new instances of their respective subclasses and stores them in the arrays above.
-    addNoun(word, nounType, nominative, oblique, person) {
-        const noun = new Noun(word, nounType, nominative, oblique, person);
+    addNoun(word, nounType, gender, nominative, oblique, person) {
+        const noun = new Noun(word, nounType, gender, nominative, oblique, person);
         this.nouns.push(noun);
         return noun;
     }
@@ -40,6 +37,26 @@ class Root {
         this.conjunctions.push(conjunction);
         return conjunction;
     }
+
+    getSpecificWord(word, wordType) {
+        console.log(wordType);
+        switch(wordType) {
+            case 'noun':
+                return filterByWord(this.nouns, word);
+                break;
+            case 'verb':
+                return filterByWord(this.verbs, word);
+                break;
+            case 'adjectives':
+                return filterByWord(this.adjectives, word);
+                break;
+            case 'conjunctions':
+                return filterByWord(this.conjunctions, word);
+                break;
+            default:
+                throw new Error('Error! There is an issue with getSpeficicWord()');
+        }
+    };
 
 // The following methods returns a random object from their respective arrays from this class.
     getRandomNoun() {
@@ -73,9 +90,10 @@ class Word {
 
 //These child classes extend Word and are used for their respective word types.
 class Noun extends Word {
-    constructor(word, nounType, nominative, oblique, person) {
+    constructor(word, nounType, gender, nominative, oblique, person) {
         super(word);
         this.nounType = nounType;
+        this.gender = gender;
         this.nominative = nominative;
         this.oblique = oblique;
         this.person = person
