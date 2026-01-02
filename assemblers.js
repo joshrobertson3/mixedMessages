@@ -1,5 +1,9 @@
 import dictionary from "./dictionary.js";
 
+const randomOf2 = () => {
+    return (Math.random() < 0.5) ? true : false;
+}
+
 // Returns the subject/object of a sentence with either a random adjective attached or not
 const assembleNoun = caseType => {
     //console.log("with new method: " + dictionary.getRandomNoun().renderNoun('object'));
@@ -8,7 +12,7 @@ const assembleNoun = caseType => {
     //return nounObj;
     //return nounObj.renderNoun(caseType);
     let person = nounObj['person'];
-    let adjRequired = (Math.random() < 0.5) ? true : false;
+    let adjRequired = randomOf2();
     let noun = nounObj.renderNoun(caseType, adjRequired);
     //console.log(adjRequired);
     if (adjRequired && nounObj['nounType'] !== 'pronoun') {
@@ -49,35 +53,76 @@ const assembleVerb = person => {
 
 //console.log(assembleVerb('third'));
 
+// Takes the sentence as formed by the functions below, capitalises first letter and adds full-stop at end.
+const formatSentence = sentence => {
+    let firstLetter = sentence.at(0);
+    let clause = firstLetter.toUpperCase() + sentence.substring(1) + '.';
+    return clause;
+}
+
 // If I'm going to add dependent clauses as an option, then I need a new class of conjunction words and build into the clause assembler function a way to generate dependent clauses randomly.
 
 // Determines make up of a clause, calls relevant functions to get each component and assembles them into one string with punctuation marks.
-const simpleSentence = () => {
-    let subjectObj = assembleNoun('subject');
+const independentClause = () => {
+    const subjectObj = assembleNoun('subject');
     //console.log('subjectObj[component] = ' + subjectObj['component']);
     //console.log('subjectObj[person] = ' + subjectObj['person']);
-    let verb = assembleVerb(subjectObj['person']);
-    let objectObj = assembleNoun('object');
-    let string = subjectObj['component'] + ' ' + verb + ' ' + objectObj['component'] + '.';
-    let firstLetter = string.at(0);
-    let clause = firstLetter.toUpperCase() + string.substring(1);
-    return clause;
+    const verb = assembleVerb(subjectObj['person']);
+    const objectObj = assembleNoun('object');
+    let string = subjectObj['component'] + ' ' + verb + ' ' + objectObj['component'];
+    return {
+        string,
+        subjectObj,
+        verb,
+        objectObj,
+    };
 }
+
+const compoundSentence = () => {
+    const obj1 = independentClause();
+    const clause1 = obj1.string;
+    const obj2 = independentClause();
+    const clause2 = obj2.string;
+    const conjunction = dictionary.getRandomConjunction('coordinating');
+    return clause1 + ' ' + conjunction.renderConjunction() + ' ' + clause2;
+}
+
+const dependentClause = obj => {
+    
+}
+
+const complexSentence = () => {
+    const independentObj = independentClause();
+    const dependentObj = dependentClause();
+    const conjunction = dictionary.getRandomConjunction('subordinating');
+    console.log(
+        `independentObj:  ${independentObj}`,
+        `dependentObj: ${dependentObj}`,
+        `conjunction: ${conjunction}`
+    )
+    
+}
+
 
 const newParagraph = (theme, numberOfClauses, sentenceTypes = []) => { // Object factory
     let _clauses = [];
     for (let i = 0; i < numberOfClauses; i ++) {
+        let obj;
         let clause;
+        let string;
         switch (sentenceTypes[i]) {
             case 'simple': 
-                clause = simpleSentence();
+                obj = simpleSentence();
+                string = obj.string;
+                clause = formatSentence(string);
+                _clauses.push(clause);
+                break;
+            case 'compound':
+                string = compoundSentence();
+                clause = formatSentence(string);
                 _clauses.push(clause);
                 break;
             /*
-            case 'compound':
-                clause = compoundSentence(); // need to make this function
-                _clauses.push(clause);
-                break;
             case 'complex':
                 clause = complexSentence();
                 _clauses.push(clause);
@@ -107,6 +152,6 @@ const newParagraph = (theme, numberOfClauses, sentenceTypes = []) => { // Object
 
 
 
-export default newParagraph;
+export default complexSentence;
 
 

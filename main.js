@@ -1,6 +1,6 @@
 // Importing classes from wordRepository.js
 import dictionary from "./dictionary.js"
-import newParagraph from "./assemblers.js";
+import complexSentence from "./assemblers.js";
 
 const book = dictionary.addNoun("book", "substantive", "book", "book", 'third');
 const dog = dictionary.addNoun("dog", "substantive", "dog", "dog", 'third');
@@ -76,6 +76,22 @@ const nice = dictionary.addAdjective('nice');
 const humongous = dictionary.addAdjective('humongous');
 const whimsical = dictionary.addAdjective('whimsical');
 
+const and = dictionary.addConjunction('and', 'coordinating');
+const forWord = dictionary.addConjunction('for', 'coordinating');
+const norWord = dictionary.addConjunction('nor', 'coordinating');
+const but = dictionary.addConjunction('but', 'coordinating');
+const orWord = dictionary.addConjunction('or', 'coordinating')
+const yet = dictionary.addConjunction('yet', 'coordinating')
+const so = dictionary.addConjunction('so', 'coordinating')
+
+const however = dictionary.addConjunction('however', 'subordinating');
+const therefore = dictionary.addConjunction('therefore', 'subordinating');
+const because = dictionary.addConjunction('because', 'subordinating');
+const although = dictionary.addConjunction('although', 'subordinating');
+const when = dictionary.addConjunction('when', 'subordinating');
+const since = dictionary.addConjunction('since', 'subordinating');
+const ifWord = dictionary.addConjunction('if', 'subordinating');
+
 /*
 console.log(dictionary);
 console.log(dictionary.nouns);
@@ -93,4 +109,10 @@ console.log(dictionary.nouns[3]['nominative']);
 //console.log(assembleVerb('thirdPerson'));
 //console.log(standardClause());
 
-console.log(newParagraph('random', 9, ['simple', 'simple', 'simple', 'simple', 'simple', 'simple', 'simple', 'simple', 'simple']));
+
+//Tests - 2 Jan 10pm
+//console.log(dictionary.getRandomConjunction('coordinating'));
+//console.log(newParagraph('random', 9, ['simple', 'compound', 'simple', 'simple', 'compound', 'compound', 'simple', 'simple', 'compound']));
+//console.log(simpleSentence());
+//console.log(dictionary.getRandomNoun());
+console.log(complexSentence());

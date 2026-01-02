@@ -1,5 +1,10 @@
 const vowels = ['A', 'E', 'I', 'O', 'U'];
 
+const pickRandom = arr => {
+    const randIndex = Math.floor(Math.random() * arr.length);
+    return arr[randIndex];
+}
+
 //This class acts as the entry point for all data - the root of all data nodes. All new instances are created using methods within this class.
 class Root {
     constructor() {
@@ -30,31 +35,30 @@ class Root {
         return adjective;
     }
 
-    addConjunction(word) {
-        const conjunction = new Conjunction(word);
+    addConjunction(word, conjuncType) {
+        const conjunction = new Conjunction(word, conjuncType);
         this.conjunctions.push(conjunction);
         return conjunction;
     }
 
 // The following methods returns a random object from their respective arrays from this class.
     getRandomNoun() {
-        let randomIndex = Math.floor(Math.random() * this.nouns.length);
-        return this.nouns[randomIndex];
+        return pickRandom(this.nouns);
     }
 
     getRandomVerb() {
-        let randomIndex = Math.floor(Math.random() * this.verbs.length);
-        return this.verbs[randomIndex];
+        return pickRandom(this.verbs);
     }
 
     getRandomAdjective() {
-        let randomIndex = Math.floor(Math.random() * this.adjectives.length);
-        return this.adjectives[randomIndex];
+        return pickRandom(this.adjectives);
     }
 
-    getRandomConjunction() {
-        let randomIndex = Math.floor(Math.random() * this.conjunctions.length);
-        return this.conjunctions[randomIndex];
+    getRandomConjunction(type) {
+        const filtered = this.conjunctions.filter(conj => {
+            return conj.conjuncType === type
+    });
+        return pickRandom(filtered);
     }
 
     // The getRandomAdverb method will accept an argument for adverbType - that way it can select the appropriate adverb for its use case in a sentence.
