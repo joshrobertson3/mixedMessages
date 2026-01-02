@@ -146,7 +146,7 @@ const newParagraph = (theme, numberOfClauses, sentenceTypes = []) => { // Object
         let string;
         switch (sentenceTypes[i]) {
             case 'simple': 
-                obj = simpleSentence();
+                obj = independentClause();
                 string = obj.string;
                 clause = formatSentence(string);
                 _clauses.push(clause);
