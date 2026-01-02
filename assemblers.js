@@ -52,7 +52,7 @@ const assembleVerb = person => {
 // If I'm going to add dependent clauses as an option, then I need a new class of conjunction words and build into the clause assembler function a way to generate dependent clauses randomly.
 
 // Determines make up of a clause, calls relevant functions to get each component and assembles them into one string with punctuation marks.
-const assembleClause = () => {
+const simpleSentence = () => {
     let subjectObj = assembleNoun('subject');
     //console.log('subjectObj[component] = ' + subjectObj['component']);
     //console.log('subjectObj[person] = ' + subjectObj['person']);
@@ -64,8 +64,49 @@ const assembleClause = () => {
     return clause;
 }
 
-//console.log(assembleClause());
+const newParagraph = (theme, numberOfClauses, sentenceTypes = []) => { // Object factory
+    let _clauses = [];
+    for (let i = 0; i < numberOfClauses; i ++) {
+        let clause;
+        switch (sentenceTypes[i]) {
+            case 'simple': 
+                clause = simpleSentence();
+                _clauses.push(clause);
+                break;
+            /*
+            case 'compound':
+                clause = compoundSentence(); // need to make this function
+                _clauses.push(clause);
+                break;
+            case 'complex':
+                clause = complexSentence();
+                _clauses.push(clause);
+                break;
+            case 'compoundComplex':
+                clause = compoundComplexSentence();
+                _clauses.push(clause);
+                break;
+            */
+            default:
+                throw new Error('Error! Something has gone wrong with newParagraph().')
+        }
+    }
 
-export default assembleClause;
+    return {
+        _theme: theme,
+        _numberOfClauses: numberOfClauses,
+        _clauses,
+    }
+}
+
+
+
+//console.log(simpleSentence());
+
+// I think I need a new class independent from the dictionary that holds data for the sentence being formed - that way, you can query it to form sentences based on that data. i.e. i could form sentences like "A mighty book must eat a loving onion, because it makes the book cry."
+
+
+
+export default newParagraph;
 
 

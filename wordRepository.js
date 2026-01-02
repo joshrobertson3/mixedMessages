@@ -6,6 +6,8 @@ class Root {
         this.nouns = [];
         this.verbs = [];
         this.adjectives = [];
+        this.conjunctions = []; // New subclass for subordinate clauses.
+        //this.articleTypes = ['definite', 'indefinite']?
         //Create this.prepositions, this.conjunctions, this.adverbs.
     }
 
@@ -28,6 +30,12 @@ class Root {
         return adjective;
     }
 
+    addConjunction(word) {
+        const conjunction = new Conjunction(word);
+        this.conjunctions.push(conjunction);
+        return conjunction;
+    }
+
 // The following methods returns a random object from their respective arrays from this class.
     getRandomNoun() {
         let randomIndex = Math.floor(Math.random() * this.nouns.length);
@@ -42,6 +50,11 @@ class Root {
     getRandomAdjective() {
         let randomIndex = Math.floor(Math.random() * this.adjectives.length);
         return this.adjectives[randomIndex];
+    }
+
+    getRandomConjunction() {
+        let randomIndex = Math.floor(Math.random() * this.conjunctions.length);
+        return this.conjunctions[randomIndex];
     }
 
     // The getRandomAdverb method will accept an argument for adverbType - that way it can select the appropriate adverb for its use case in a sentence.
@@ -119,6 +132,17 @@ class Adjective extends Word {
         } else {
             return `a ${this.word}`;
         }
+    }
+}
+
+class Conjunction extends Word {
+    constructor(word, conjuncType) {
+        super(word);
+        this.conjuncType = conjuncType;
+    }
+
+    renderConjunction() {
+        return this.word; // Anything else?
     }
 }
 

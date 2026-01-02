@@ -1,6 +1,6 @@
 // Importing classes from wordRepository.js
 import dictionary from "./dictionary.js"
-import assembleClause from "./assemblers.js";
+import newParagraph from "./assemblers.js";
 
 const book = dictionary.addNoun("book", "substantive", "book", "book", 'third');
 const dog = dictionary.addNoun("dog", "substantive", "dog", "dog", 'third');
@@ -91,4 +91,6 @@ console.log(dictionary.nouns[3]['nominative']);
 
 //console.log(eat.renderVerb('firstPerson'));
 //console.log(assembleVerb('thirdPerson'));
-console.log(assembleClause());
+//console.log(standardClause());
+
+console.log(newParagraph('random', 9, ['simple', 'simple', 'simple', 'simple', 'simple', 'simple', 'simple', 'simple', 'simple']));
