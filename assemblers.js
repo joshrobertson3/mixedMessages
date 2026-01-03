@@ -6,7 +6,7 @@ export const assembleNoun = caseType => {
     let component;
     let nounObj = dictionary.getRandomNoun();
     //console.log(nounObj)
-   //console.log(nounObj.person);
+    //console.log(nounObj.person);
     let adjRequired = randomBoolean();
     let noun = nounObj.renderNoun(caseType, adjRequired);
     //console.log(adjRequired);
@@ -107,7 +107,8 @@ export const compoundSentence = () => {
     };
 }
 
-
+/*
+// TO DO - Finish building this function. To determine whether there should be multiple types of dependent clauses. Refer to https://en.wikipedia.org/wiki/Dependent_clause
 export const dependentClause = obj => {
     let pronoun;
     let pronounObj;
@@ -121,16 +122,13 @@ export const dependentClause = obj => {
         pronounObj = dictionary.getSpecificWord('it', 'noun');
         pronoun = pronounObj.word;
     }
-    const verb = assembleVerb(pronounObj);
-
-    // TO DO - Finish building this function. To determine whether there should be multiple types of dependent clauses. Refer to https://en.wikipedia.org/wiki/Dependent_clause
+    const verb = assembleVerb(pronounObj); // There should be more info passed into assembleVerb - eg type of dependent clause because that influences tense
     
     // Tossing between incorporating adverbial clauses here + other dependent clause types. Will this impact how I plan to add adverbs in? Might be good to have this plus inserting adverb in independent clause. Having it in a dependent clause gives emphasis.
 }
 
-
-const complexSentence = () => {
-    const independentObj = independentClause();
+const complexSentence = theme => {
+    const independentObj = independentClause(theme);
     // Determines what dependentClause should depend on (i.e. whether the subject or the object of the independentClause)
     let focusObj;
     if (randomBoolean()) {
@@ -149,47 +147,54 @@ const complexSentence = () => {
     // NEED to finish building this function. Need to finish building dependentClause() first before finishing this function.
 
 }
+*/
 
-const newParagraph = (theme, numberOfClauses, sentenceTypes = []) => { // Object factory
-    let _clauses = [];
-    for (let i = 0; i < numberOfClauses; i ++) {
-        let obj;
-        let clause;
-        let string;
-        switch (sentenceTypes[i]) {
+const newSentence = sentenceType => {
+    let obj;
+    let clause;
+    let string;
+    switch (sentenceType) {
             case 'simple': 
                 obj = independentClause();
                 string = obj.string;
-                console.log('Action: newParagraph()',
-                    `string:`, string);
+                //console.log(`Action: newSentence(${sentenceType})`, `string:`, string);
                 clause = formatSentence(string);
-                _clauses.push(clause);
+                return clause;
                 break;
             case 'compound':
                 obj = compoundSentence();
                 string = obj.string;
+                //console.log(`Action: newSentence(${sentenceType})`, `string:`, string);
                 clause = formatSentence(string);
-                _clauses.push(clause);
+                return clause;
                 break;
             /*
             case 'complex':
                 obj = complexSentence();
                 string = obj.string;
-                _clauses.push(clause);
+                return clause;
                 break;
             case 'compoundComplex':
                 obj = compoundComplexSentence();
                 string = obj.string;
-                _clauses.push(clause);
+                return clause;
                 break;
             */
             default:
-                throw new Error('Error! Something has gone wrong with newParagraph().')
+                throw new Error('Error! Something has gone wrong with newSentence().')
         }
+}
+
+const newParagraph = (numberOfClauses, sentenceTypes = []) => { // Object factory
+    let _clauses = [];
+    let clause;
+    for (let i = 0; i < numberOfClauses; i ++) {
+        clause = newSentence(sentenceTypes[i]);
+        _clauses.push(clause);
     }
 
     return {
-        _theme: theme,
+        //_theme: theme,
         _numberOfClauses: numberOfClauses,
         _clauses,
     }

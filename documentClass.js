@@ -1,3 +1,5 @@
+import newParagraph from "./assemblers.js";
+
 class Document {
     constructor(title, author) {
         this._title = title;
@@ -31,24 +33,47 @@ class Document {
         }
     }
 
-    generateParagraph(theme, numberOfClauses, [sentenceTypes]) {
+    generateParagraph(numberOfClauses, sentenceTypes = []) {
         // Calls newParagraph factory function in assemblers.js. 
-        const paragraph = new Paragraph(theme); //change (theme) to object i.e. ({ theme, numberOfClauses })
+        const generatedParagraph = newParagraph(numberOfClauses, sentenceTypes);
+        const paragraph = new Paragraph(generatedParagraph); //change (theme) to object i.e. ({ theme, numberOfClauses })
         this.paragraphs.push(paragraph);
         return paragraph;
+    }
+
+    renderDocument() {
+        let renderedParagraph;
+        let arrayLength = this.paragraphs.length;
+        let paragraphs = [];
+        let header = this._title + '\n' + `by ${this._author}`
+        paragraphs.push(header);
+        //console.log(arrayLength);
+        for (let i = 0; i < arrayLength; i ++) {
+            //console.log(`paragraph to render:`, this.paragraphs[i]);
+            renderedParagraph = this.paragraphs[i].renderParagraph();
+            paragraphs.push(renderedParagraph);
+        }
+        //console.log(paragraphs);
+        return paragraphs.join('\n\n');
     }
 }
 
 class Paragraph {
-    constructor(theme) {
-        this.theme = theme;
-        this.sentences = [];
+    constructor({ _numberOfClauses, _clauses = []}) {
+        this.numberOfClauses = _numberOfClauses;
+        this.sentences = _clauses;
     }
 
-    addSentence(structure) {
-        // Call the relevant sentence generator from assembly.js here passing structure as the argument - could work like a switch. Then feed the returned object as the arugment to create the sentence instance below.
-        const sentence = new Sentence(structure); // change (structure) to an object i.e. ({ structure, tense, mood })
-        this.sentences.push(sentence);
-        return sentence;
+    addSentence(sentenceType) {
+        const generatedSentence = newSentence(sentenceType);
+        this.sentences.push(generatedSentence);
+        return generatedSentence;
+    }
+
+    renderParagraph() {
+        let renderedParagraph = this.sentences.join(' ');
+        return renderedParagraph;
     }
 }
+
+export default Document;

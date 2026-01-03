@@ -1,5 +1,6 @@
 // Importing classes from wordRepository.js
-import dictionary from "./dictionary.js"
+import dictionary from "./dictionary.js";
+import Document from "./documentClass.js";
 import newParagraph from "./assemblers.js";
 import { assembleNoun, assembleVerb, independentClause, compoundSentence } from "./assemblers.js";
 
@@ -124,7 +125,7 @@ console.log(dictionary.nouns[3]['nominative']);
 //console.log(dictionary.getSpecificWord('cat', 'noun'));
 //console.log(dependentClause());
 
-
+/*
 let testNoun = assembleNoun('subject');
 //console.log(testNoun);
 //console.log(testNoun.nounObj.person);
@@ -133,3 +134,15 @@ let testVerb = assembleVerb(testNoun);
 console.log('testing action - assembleVerb(testNoun)',
     testVerb
 );
+*/
+
+const newDocument = new Document('This is a test', 'Joshua Robertson');
+
+
+newDocument.generateParagraph(4, ['compound', 'compound', 'simple', 'compound']);
+newDocument.generateParagraph(5, ['simple', 'compound', 'simple', 'compound', 'simple']);
+newDocument.generateParagraph(3, ['compound', 'simple', 'simple']);
+newDocument.generateParagraph(6, ['compound', 'compound', 'simple', 'compound', 'simple', 'simple']);
+//console.log(newDocument.paragraphs);
+
+console.log(newDocument.renderDocument());
