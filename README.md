@@ -161,23 +161,23 @@ Example (subordinating):
 
 **I entered the following text in main.js:**
 
-![A screenshot of the text I entered] (./assets/inputCode.png)
+![A screenshot of the text I entered](assets/inputCode.png)
 
 **The first paragraph of my document originally returned:**
 
-![A screenshot of the original version of the first paragraph's object] (assets/originalParagraph.png)
+![A screenshot of the original version of the first paragraph's object](assets/originalParagraph.png)
 
 **The program then added this sentence to the first paragraph:**
 
-![A screenshot of the text returned for the new sentence] (assets/addedSentence.png)
+![A screenshot of the text returned for the new sentence](assets/addedSentence.png)
 
 **The first paragraph then became:**
 
-![A screenshot of the altered version of the first paragraph's object] (assets/alteredParagraph.png)
+![A screenshot of the altered version of the first paragraph's object](assets/alteredParagraph.png)
 
 **And finally, the document was rendered as:**
 
-![A screenshot of the entire document as rendered] (assets/renderedDocument.png)
+![A screenshot of the entire document as rendered](assets/renderedDocument.png)
 
 --------
 
