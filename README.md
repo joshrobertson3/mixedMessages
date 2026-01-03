@@ -71,6 +71,7 @@ From main.js, you can:
 
 ##### Create new document
 To create a new document, simply create a new instance of the Document class and save it to a const variable.
+
 ```const newDocument = new Document('Document Title', 'Name of Author');```
 
 You can create as many documents as you'd like.
@@ -79,18 +80,22 @@ You can create as many documents as you'd like.
 After initialising your document, you'll then be able to add paragraphs to it.
 
 Simply call the .generateParagraph(numberOfClauses, sentenceTypes = []) method on your document. This takes the number of sentences you want in the paragraph (numberOfClauses) and an array of sentence types (either 'simple' or 'compound' at the momnet) for each of your sentences (sentenceTypes).
+
 ```newDocument.generateParagraph(4, ['compound', 'compound', 'simple', 'compound']);```
 
 ##### Add sentences to paragraphs
 If you want to add more sentences to a specific paragraph, you can use the addSentence(sentenceType) method on the specific paragraph and enter your preferred sentence type as the argument (either 'compound' or 'simple').
+
 ```newDocument.paragraph[index].addSentence('simple');```
 
 ##### Rendering paragraphs
 If you'd like to return a specific paragraph rendered for readability, you can call the .renderParagraph() method on the specific paragraph. This returns a string of all the sentences of that paragraph joined together.
+
 ```newDocument.paragraph[index].renderParagraph();```
 
 ##### Rendering your whole document
 To render your whole document for readability, call the .renderDocument() method on the document itself and log it to the console. This adds the title and author at the top of your document, then joins all the paragraphs together separated with 2 line breaks each.
+
 ```console.log(newDocument.renderDocument());```
 
 
@@ -107,9 +112,11 @@ To add words to the dictionary, declare a const variable by calling one of the f
     person: either 'first', 'second' or 'third'. Most substantive words will be 'third', pronouns can be any type. 
 
 Example (pronoun):
+
 ```const he = dictionary.addNoun('he', 'pronoun', 'masculine', 'he', 'him', 'third);```
 
 Example (substantive):
+
 ```const apple = dictionary.addNoun('apple', 'substantive', 'neutral', 'apple', 'apple', 'third');```
     
 ###### addVerb(word, verbType, thirdPerson)
@@ -120,15 +127,18 @@ Example (substantive):
 - I will eventually add things like past participle, continuous participle, etc.
 
 Example (modal):
+
 ```const should = dictionary.addVerb('should', 'modal', 'should');```
 
 Example (regular):
+
 ```const read = dictionary.addVerb('read', 'regular', 'reads');```
 
 ###### addAdjective(word)
 - This takes 'word' as the argument which is the same as above.
 
 Example:
+
 ```const happy = dictionary.addAdjective('happy');```
 
 ###### addConjunction(word, conjuncType)
@@ -138,9 +148,11 @@ Example:
 - I will need to add more arguments here to indicate what conjunctions can be used for different types of complex sentences.
 
 Example (coordinating):
+
 ```const and = dictionary.addConjunction('and', 'coordinating');```
 
 Example (subordinating):
+
 ```const however = dictionary.addConjunction('however', 'subordinating');```
 
 
@@ -153,19 +165,19 @@ Example (subordinating):
 
 **The first paragraph of my document originally returned:**
 
-![A screenshot of the original version of the first paragraph's object] (./assets/originalParagraph.png)
+![A screenshot of the original version of the first paragraph's object] (assets/originalParagraph.png)
 
 **The program then added this sentence to the first paragraph:**
 
-![A screenshot of the text returned for the new sentence] (./assets/addedSentence.png)
+![A screenshot of the text returned for the new sentence] (assets/addedSentence.png)
 
 **The first paragraph then became:**
 
-![A screenshot of the altered version of the first paragraph's object] (./assets/alteredParagraph.png)
+![A screenshot of the altered version of the first paragraph's object] (assets/alteredParagraph.png)
 
 **And finally, the document was rendered as:**
 
-![A screenshot of the entire document as rendered] (./assets/renderedDocument.png)
+![A screenshot of the entire document as rendered] (assets/renderedDocument.png)
 
 --------
 
