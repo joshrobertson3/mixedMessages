@@ -114,20 +114,22 @@ console.log(dictionary.nouns[3]['nominative']);
 
 //Tests - 2 Jan 10pm
 //console.log(dictionary.getRandomConjunction('coordinating'));
-console.log(newParagraph('random', 9, ['simple', 'compound', 'simple', 'simple', 'compound', 'compound', 'simple', 'simple', 'compound']));
+//console.log(newParagraph('random', 4, ['compound', 'simple', 'simple', 'compound']));
 //console.log(simpleSentence());
 //console.log(dictionary.getRandomNoun());
 //console.log(complexSentence());
+
 //console.log(independentClause());
 
 //console.log(dictionary.getSpecificWord('cat', 'noun'));
 //console.log(dependentClause());
 
-/*
+
 let testNoun = assembleNoun('subject');
-console.log(testNoun);
-console.log(testNoun.nounObj.person);
+//console.log(testNoun);
+//console.log(testNoun.nounObj.person);
 
 let testVerb = assembleVerb(testNoun);
-console.log(testVerb);
-*/
+console.log('testing action - assembleVerb(testNoun)',
+    testVerb
+);

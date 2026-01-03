@@ -5,8 +5,8 @@ import { pickRandom, randomBoolean } from "./helperFunctions.js";
 export const assembleNoun = caseType => {
     let component;
     let nounObj = dictionary.getRandomNoun();
-    console.log(nounObj)
-    console.log(nounObj.person);
+    //console.log(nounObj)
+   //console.log(nounObj.person);
     let adjRequired = randomBoolean();
     let noun = nounObj.renderNoun(caseType, adjRequired);
     //console.log(adjRequired);
@@ -16,11 +16,12 @@ export const assembleNoun = caseType => {
     } else {
         component = noun;
     }
+    /*
     console.log(
-        `[${new Date().toISOString()}]`,
         `Action: assembleNoun(${caseType})`,
-        `result: { component: ${component}, nounObj:`, nounObj.Noun, ' }'
+        `result: { component: ${component}, caseType: ${caseType}, nounObj:`, nounObj, ' }'
     );
+    */
     return { 
         component,
         caseType,
@@ -33,25 +34,36 @@ export const assembleNoun = caseType => {
 //Returns the verb of a sentence either as a regular verb or as a modal verb combination.
 export const assembleVerb = obj => {
     let person = obj.nounObj.person;
-    console.log(person);
+    //console.log(person);
     let component;
+    let componentType;
+    let verbs = [];
     let verbObj = dictionary.getRandomVerb();
+    verbs.push(verbObj);
     if (verbObj['verbType'] === 'modal') {
-        let additionalVerb;
+        componentType = 'modal';
+        let auxVerbObj;
         do {
-            additionalVerb = dictionary.getRandomVerb();
-            //console.log('Additional Verb: ' + additionalVerb['word']);
-        } while (additionalVerb['verbType'] === 'modal');
-        component = verbObj.renderVerb('firstPerson') + ' ' + additionalVerb.renderVerb('firstPerson');
+            auxVerbObj = dictionary.getRandomVerb();
+            //console.log('auxVerbObj: ' + auxVerbObj['word']);
+        } while (auxVerbObj['verbType'] === 'modal');
+        verbs.push(auxVerbObj)
+        component = verbObj.renderVerb('firstPerson') + ' ' + auxVerbObj.renderVerb('firstPerson');
     } else {
+        componentType = 'notModal'
         component = verbObj.renderVerb(person);
     }
+    /*
     console.log(
-        `[${new Date().toISOString()}]`,
         `Action: assembleVerb(${obj})`,
-        `result: component = ${component}`
+        `result: { component: ${component}, componentType: ${componentType}, verbObj: `, verbObj, ' }'
     );
-    return component; //maybe return an object?
+    */
+    return {
+        component,
+        componentType,
+        verbs,
+    } 
 }
 
 //console.log(assembleVerb('third'));
@@ -66,16 +78,16 @@ const formatSentence = sentence => {
 // Determines make up of a clause, calls relevant functions to get each component and assembles them into one string with punctuation marks.
 export const independentClause = () => {
     const subjectObj = assembleNoun('subject');
-    console.log('subjectObj: ', subjectObj);
+    //console.log('subjectObj: ', subjectObj);
     //console.log('subjectObj[component] = ' + subjectObj['component']);
     //console.log('subjectObj[person] = ' + subjectObj['person']);
-    const verb = assembleVerb(subjectObj);
+    const verbObj = assembleVerb(subjectObj);
     const objectObj = assembleNoun('object');
-    let string = subjectObj['component'] + ' ' + verb + ' ' + objectObj['component'];
+    let string = subjectObj['component'] + ' ' + verbObj['component'] + ' ' + objectObj['component'];
     return {
         string,
         subjectObj,
-        verb,
+        verbObj,
         objectObj,
     };
 }
@@ -148,21 +160,26 @@ const newParagraph = (theme, numberOfClauses, sentenceTypes = []) => { // Object
             case 'simple': 
                 obj = independentClause();
                 string = obj.string;
+                console.log('Action: newParagraph()',
+                    `string:`, string);
                 clause = formatSentence(string);
                 _clauses.push(clause);
                 break;
             case 'compound':
-                string = compoundSentence();
+                obj = compoundSentence();
+                string = obj.string;
                 clause = formatSentence(string);
                 _clauses.push(clause);
                 break;
             /*
             case 'complex':
-                clause = complexSentence();
+                obj = complexSentence();
+                string = obj.string;
                 _clauses.push(clause);
                 break;
             case 'compoundComplex':
-                clause = compoundComplexSentence();
+                obj = compoundComplexSentence();
+                string = obj.string;
                 _clauses.push(clause);
                 break;
             */
