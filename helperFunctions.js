@@ -20,3 +20,10 @@ export const formatSentence = sentence => {
     let clause = firstLetter.toUpperCase() + sentence.substring(1) + '.';
     return clause;
 }
+
+// Returns random number from range
+export const randomNumber = (min, max) => {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled +1)) + minCeiled;
+}

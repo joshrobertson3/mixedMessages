@@ -61,8 +61,9 @@ All of these functions return objects that can be used to build more complex tex
 
 From main.js, you can:
 - create new documents,
-- add paragraphs to documents,
-- add sentences to paragraphs,
+- generate entire document randomly,
+- manually add paragraphs to documents,
+- manually add sentences to paragraphs,
 - render paragraphs,
 - render documents, and
 - add words to the dictionary,
@@ -75,6 +76,11 @@ To create a new document, simply create a new instance of the Document class and
 ```const newDocument = new Document('Document Title', 'Name of Author');```
 
 You can create as many documents as you'd like.
+
+#### Generate entire document randomly
+You can get the program to randomly generate an entire document after you've initialised your document. I.e. the program will generate a random number of paragraphs with a random number of sentences. 
+
+```newDocument.generateRandomDocument();```
 
 #### Add paragraphs to you document
 After initialising your document, you'll then be able to add paragraphs to it.
@@ -159,7 +165,17 @@ Example (subordinating):
 --------
 ### Examples of returned results
 
-**I entered the following text in main.js:**
+#### Example 1: Generating entire document randomly
+**I initialised a new document called 'Testing Random Generation', used the .generateRandomDocument() method on it and logged the document to the console using .renderDocument()**
+
+![A screenshot of the code I entered](assets/randomGenCode.png)
+
+**My program returned the following text**
+
+![A screenshot of random document as rendered](assets/renderedRandomDoc.png)
+
+#### Example 2: Manually creating paragraphs and adding sentence to specific paragraph
+**I initialised a new document called 'Testing Manual Generation', manually added 4 paragraphs with specified sentence types, logged the first paragraph as generated, added a sentence to that paragraph, logged the updated paragraph to the console, then rendered the document**
 
 ![A screenshot of the text I entered](assets/inputCode.png)
 
@@ -184,6 +200,8 @@ Example (subordinating):
 ### Ideas for Expansion
 I will be extending this project to include the following:
 - Add more complex sentence structures including dependent clauses, passive voice, tense, subjunctive, and imperative constructions,
+- All words will have meaning tokenised with it,
+- Adding a way to parse a user's input text, tagging keywords, then finding words related to them in the word repository to return text based on the input,
 - Add adverbs - the clause randomiser will need to determine whether an adverb is required and then based on what adverb is returned from the dictionary, it will place it in the sentence based on its type, i.e.
     - if temporal, at the beginning with a comma (eg 'Yesterday, I went to the shop), or at the end of a sentence (eg 'I went to the shop yesterday),
     - if manner, near the verb (eg 'he turned left'), etc

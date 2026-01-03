@@ -1,5 +1,6 @@
 import newParagraph from "./assemblers.js";
-import { newSentence  } from "./assemblers.js";
+import { newSentence } from "./assemblers.js";
+import { randomNumber, randomBoolean } from "./helperFunctions.js"
 
 class Document {
     constructor(title, author) {
@@ -37,9 +38,32 @@ class Document {
     generateParagraph(numberOfClauses, sentenceTypes = []) {
         // Calls newParagraph factory function in assemblers.js. 
         const generatedParagraph = newParagraph(numberOfClauses, sentenceTypes);
-        const paragraph = new Paragraph(generatedParagraph); //change (theme) to object i.e. ({ theme, numberOfClauses })
+        const paragraph = new Paragraph(generatedParagraph);
         this.paragraphs.push(paragraph);
         return paragraph;
+    }
+
+    generateRandomDocument() {
+        let paragraphCount = randomNumber(1, 10);
+        let clauseCount;
+        for (let i = 0; i < paragraphCount; i ++) {
+            clauseCount = randomNumber(1,8);
+            let sentenceType;
+            let sentenceTypes = [];
+            for (let j = 0; j < clauseCount; j ++) {
+                if (randomBoolean()) {
+                    sentenceType = 'simple'
+                } else {
+                    sentenceType = 'compound'
+                }
+                sentenceTypes.push(sentenceType);
+            }
+            let generatedParagraph = newParagraph(clauseCount, sentenceTypes);
+            let paragraph = new Paragraph(generatedParagraph);
+            this.paragraphs.push(paragraph);
+        }
+        //console.log(this.document.renderDocument());
+        return this.paragraphs;
     }
 
     renderDocument() {

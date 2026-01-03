@@ -136,8 +136,7 @@ console.log('testing action - assembleVerb(testNoun)',
 );
 */
 
-const newDocument = new Document('This is a test', 'Joshua Robertson');
-
+const newDocument = new Document('Testing Manual Generation', 'Joshua Robertson');
 
 newDocument.generateParagraph(4, ['compound', 'compound', 'simple', 'compound']);
 newDocument.generateParagraph(5, ['simple', 'compound', 'simple', 'compound', 'simple']);
@@ -146,17 +145,28 @@ newDocument.generateParagraph(6, ['compound', 'compound', 'simple', 'compound', 
 
 console.log(
     'paragraph[0] before adding sentence:',
-    newDocument.paragraphs[0]
+    newDocument.paragraphs[0],
+    `\n`
 );
 
 console.log(
     'new sentence being added to paragrpah:',
-    newDocument.paragraphs[0].addSentence('simple')
+    newDocument.paragraphs[0].addSentence('simple'),
+    `\n`
 );
 
 console.log(
     'paragraph[0] after new sentence added:',
-    newDocument.paragraphs[0]
+    newDocument.paragraphs[0],
+    `\n`
 );
 
 console.log(newDocument.renderDocument());
+
+
+
+/*
+const testDocument = new Document('Testing Random Generation', 'Joshua Robertson')
+testDocument.generateRandomDocument();
+console.log(testDocument.renderDocument());
+*/
