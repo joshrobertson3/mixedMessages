@@ -1,4 +1,5 @@
 import newParagraph from "./assemblers.js";
+import { newSentence  } from "./assemblers.js";
 
 class Document {
     constructor(title, author) {
@@ -67,6 +68,7 @@ class Paragraph {
     addSentence(sentenceType) {
         const generatedSentence = newSentence(sentenceType);
         this.sentences.push(generatedSentence);
+        this.numberOfClauses ++;
         return generatedSentence;
     }
 

@@ -13,3 +13,10 @@ export const randomBoolean = () => {
 export const filterByWord = (obj, word) => {
     return obj.filter(object => { return object.word === word });
 }
+
+// Takes the sentence as formed by the functions below, capitalises first letter and adds full-stop at end.
+export const formatSentence = sentence => {
+    let firstLetter = sentence.at(0);
+    let clause = firstLetter.toUpperCase() + sentence.substring(1) + '.';
+    return clause;
+}

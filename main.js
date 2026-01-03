@@ -143,6 +143,20 @@ newDocument.generateParagraph(4, ['compound', 'compound', 'simple', 'compound'])
 newDocument.generateParagraph(5, ['simple', 'compound', 'simple', 'compound', 'simple']);
 newDocument.generateParagraph(3, ['compound', 'simple', 'simple']);
 newDocument.generateParagraph(6, ['compound', 'compound', 'simple', 'compound', 'simple', 'simple']);
-//console.log(newDocument.paragraphs);
+
+console.log(
+    'paragraph[0] before adding sentence:',
+    newDocument.paragraphs[0]
+);
+
+console.log(
+    'new sentence being added to paragrpah:',
+    newDocument.paragraphs[0].addSentence('simple')
+);
+
+console.log(
+    'paragraph[0] after new sentence added:',
+    newDocument.paragraphs[0]
+);
 
 console.log(newDocument.renderDocument());

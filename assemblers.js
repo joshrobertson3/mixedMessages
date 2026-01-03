@@ -1,5 +1,5 @@
 import dictionary from "./dictionary.js";
-import { pickRandom, randomBoolean } from "./helperFunctions.js";
+import { pickRandom, randomBoolean, formatSentence } from "./helperFunctions.js";
 
 // Returns the subject/object of a sentence with either a random adjective attached or not
 export const assembleNoun = caseType => {
@@ -68,12 +68,7 @@ export const assembleVerb = obj => {
 
 //console.log(assembleVerb('third'));
 
-// Takes the sentence as formed by the functions below, capitalises first letter and adds full-stop at end.
-const formatSentence = sentence => {
-    let firstLetter = sentence.at(0);
-    let clause = firstLetter.toUpperCase() + sentence.substring(1) + '.';
-    return clause;
-}
+
 
 // Determines make up of a clause, calls relevant functions to get each component and assembles them into one string with punctuation marks.
 export const independentClause = () => {
@@ -98,7 +93,7 @@ export const compoundSentence = () => {
     const clauseObj2 = independentClause();
     const clauseString2 = clauseObj2.string;
     const conjunction = dictionary.getRandomConjunction('coordinating');
-    let string = clauseString1 + ' ' + conjunction.renderConjunction() + ' ' + clauseString2; 
+    let string = clauseString1 + ', ' + conjunction.renderConjunction() + ' ' + clauseString2; 
     return {
         string,
         clauseObj1,
@@ -149,7 +144,7 @@ const complexSentence = theme => {
 }
 */
 
-const newSentence = sentenceType => {
+export const newSentence = sentenceType => {
     let obj;
     let clause;
     let string;
