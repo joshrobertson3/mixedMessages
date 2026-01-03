@@ -166,32 +166,32 @@ Example (subordinating):
 ### Examples of returned results
 
 #### Example 1: Generating entire document randomly
-**I initialised a new document called 'Testing Random Generation', used the .generateRandomDocument() method on it and logged the document to the console using .renderDocument()**
+I initialised a new document called 'Testing Random Generation', used the .generateRandomDocument() method on it and logged the document to the console using .renderDocument()
 
 ![A screenshot of the code I entered](assets/randomGenCode.png)
 
-**My program returned the following text**
+My program returned the following text
 
 ![A screenshot of random document as rendered](assets/renderedRandomDoc.png)
 
 #### Example 2: Manually creating paragraphs and adding sentence to specific paragraph
-**I initialised a new document called 'Testing Manual Generation', manually added 4 paragraphs with specified sentence types, logged the first paragraph as generated, added a sentence to that paragraph, logged the updated paragraph to the console, then rendered the document**
+I initialised a new document called 'Testing Manual Generation', manually added 4 paragraphs with specified sentence types, logged the first paragraph as generated, added a sentence to that paragraph, logged the updated paragraph to the console, then rendered the document
 
 ![A screenshot of the text I entered](assets/inputCode.png)
 
-**The first paragraph of my document originally returned:**
+The first paragraph of my document originally returned:
 
 ![A screenshot of the original version of the first paragraph's object](assets/originalParagraph.png)
 
-**The program then added this sentence to the first paragraph:**
+The program then added this sentence to the first paragraph:
 
 ![A screenshot of the text returned for the new sentence](assets/addedSentence.png)
 
-**The first paragraph then became:**
+The first paragraph then became:
 
 ![A screenshot of the altered version of the first paragraph's object](assets/alteredParagraph.png)
 
-**And finally, the document was rendered as:**
+And finally, the document was rendered as:
 
 ![A screenshot of the entire document as rendered](assets/renderedDocument.png)
 
