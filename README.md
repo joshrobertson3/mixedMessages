@@ -15,11 +15,11 @@ I built this project based on the Mixed Messages portfolio project from Codecade
 
 ----------
 
-#### Structure
+### Structure
 
 This program is split into the following files:
 
-##### Document
+#### Document
 - A Document class that stores instances of documents which includes a title, the author's name, and an array of paragraphs which are themselves instances of the Paragraph class. It includes these methods:
     - getters and setters for the title and author,
     - generateParagraph() which calls on the newParagraph factory function in assemblers.js and returns a paragraph object which is then passed into the constructor for the Paragraph class to tag it as a paragraph instance. 
@@ -28,11 +28,11 @@ This program is split into the following files:
     - addSentence() which allows for additional sentences to be added to specific paragraphs, and
     - renderParagraph() which loops through the paragraph array and joins all sentences together to form a paragraph.
 
-##### Word Repository
+#### Word Repository
 - A Root class that stores arrays of words for use in the program with methods that create instances of the subclasses below and methods to randomly select words,
 - Subclasses for nouns, verbs and adjectives with methods to render them.
 
-##### Assemblers
+#### Assemblers
 - A variety of functions that:
     - Assemble elements of sentences including the subject, verb and object of a sentence,
     - Combine elements into different types of sentences, and
@@ -40,24 +40,24 @@ This program is split into the following files:
 
 All of these functions return objects that can be used to build more complex text.
 
-##### Helper Functions
+#### Helper Functions
 - A variety of useful modular functions that can be used across the program including:
     - pickRandom(array) - randomly picks an element from an array,
     - randomBoolean() - randomly returns true or false,
     - filderByWord(object, word) - allows filtering of an array of objects inside another object/class by a specific property inside that object.
     - formatSentence(sentence) - capitalises the first letter of a sentence and adds a full-stop at the end of the sentence.
 
-##### Dictionary
+#### Dictionary
 - Defines 'dictionary' as the only instance of the Root class and exports it to the relevant files.
 
-##### Main
+#### Main
 - Imports all relevant classes and functions,
 - Allows the user to add words by using methods from the Root to create instances of the Nouns, Verbs and Adjectives subclasses, and 
 - Orchestrates the entire program by calling assembleClause().
 
 -------
 
-#### Running the program
+### Running the program
 
 From main.js, you can:
 - create new documents,
@@ -69,40 +69,40 @@ From main.js, you can:
 
 **Before you generate text, you'll need to create a document.**
 
-##### Create new document
+#### Create new document
 To create a new document, simply create a new instance of the Document class and save it to a const variable.
 
 ```const newDocument = new Document('Document Title', 'Name of Author');```
 
 You can create as many documents as you'd like.
 
-##### Add paragraphs to you document
+#### Add paragraphs to you document
 After initialising your document, you'll then be able to add paragraphs to it.
 
 Simply call the .generateParagraph(numberOfClauses, sentenceTypes = []) method on your document. This takes the number of sentences you want in the paragraph (numberOfClauses) and an array of sentence types (either 'simple' or 'compound' at the momnet) for each of your sentences (sentenceTypes).
 
 ```newDocument.generateParagraph(4, ['compound', 'compound', 'simple', 'compound']);```
 
-##### Add sentences to paragraphs
+#### Add sentences to paragraphs
 If you want to add more sentences to a specific paragraph, you can use the addSentence(sentenceType) method on the specific paragraph and enter your preferred sentence type as the argument (either 'compound' or 'simple').
 
 ```newDocument.paragraph[index].addSentence('simple');```
 
-##### Rendering paragraphs
+#### Rendering paragraphs
 If you'd like to return a specific paragraph rendered for readability, you can call the .renderParagraph() method on the specific paragraph. This returns a string of all the sentences of that paragraph joined together.
 
 ```newDocument.paragraph[index].renderParagraph();```
 
-##### Rendering your whole document
+#### Rendering your whole document
 To render your whole document for readability, call the .renderDocument() method on the document itself and log it to the console. This adds the title and author at the top of your document, then joins all the paragraphs together separated with 2 line breaks each.
 
 ```console.log(newDocument.renderDocument());```
 
 
-##### Adding words to the dictonary
+#### Adding words to the dictonary
 To add words to the dictionary, declare a const variable by calling one of the following methods on 'dictionary':
 
-###### addNoun(word, nounType, gender, nominative, oblique, person)
+##### addNoun(word, nounType, gender, nominative, oblique, person)
 - This takes the following arguments:
     - word: this acts as the 'id' of the word - this should be the word itself (same as nominative),
     - nounType: either 'pronoun' or 'substantive'. Can extend to include other types, however function logic is based on these two types only (for now),
@@ -119,7 +119,7 @@ Example (substantive):
 
 ```const apple = dictionary.addNoun('apple', 'substantive', 'neutral', 'apple', 'apple', 'third');```
     
-###### addVerb(word, verbType, thirdPerson)
+##### addVerb(word, verbType, thirdPerson)
 - This takes the following arguments:
     - word: same as addNoun() above. Should be how the word is conjugated for first person. I will probably add both first and second person as additional arguments,
     - verbType: currently either 'regular' or 'modal'. I will probaby extend this to include other types.
@@ -134,14 +134,14 @@ Example (regular):
 
 ```const read = dictionary.addVerb('read', 'regular', 'reads');```
 
-###### addAdjective(word)
+##### addAdjective(word)
 - This takes 'word' as the argument which is the same as above.
 
 Example:
 
 ```const happy = dictionary.addAdjective('happy');```
 
-###### addConjunction(word, conjuncType)
+##### addConjunction(word, conjuncType)
 - This takes the folllowing arguments:
     - word: as above,
     - conjuncType: either 'coordinating' or 'subordinating'. Coordinating conjunctions are used in compound sentences while subordinating conjunctions are used to create complex sentences.
@@ -157,7 +157,7 @@ Example (subordinating):
 
 
 --------
-#### Examples of returned results
+### Examples of returned results
 
 **I entered the following text in main.js:**
 
@@ -181,7 +181,7 @@ Example (subordinating):
 
 --------
 
-#### Ideas for Expansion
+### Ideas for Expansion
 I will be extending this project to include the following:
 - Add more complex sentence structures including dependent clauses, passive voice, tense, subjunctive, and imperative constructions,
 - Add adverbs - the clause randomiser will need to determine whether an adverb is required and then based on what adverb is returned from the dictionary, it will place it in the sentence based on its type, i.e.
