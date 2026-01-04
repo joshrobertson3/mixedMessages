@@ -104,16 +104,20 @@ class Noun extends Word {
         }
     }
 
-    renderNoun(caseType, adjRequired) { //Add articleType as arg to render with the correct indefinite article or definite article - this returns either a string with the article or one without (for use with adjectives)
+    renderNoun(caseType, adjRequired, articleType) { //Add articleType as arg to render with the correct indefinite article or definite article - this returns either a string with the article or one without (for use with adjectives)
         if (this.nounType === 'pronoun' && caseType === 'subject') {
             return this.nominative;
         } else if (this.nounType === 'pronoun' && caseType === 'object') {
             return this.oblique;
         } else if (!adjRequired) {
-            if (this.startsWithVowel) {
-                return `an ${this.word}`;
+            if (articleType === 'indefinite') {
+                if (this.startsWithVowel) {
+                    return `an ${this.word}`;
+                } else {
+                    return `a ${this.word}`
+                }
             } else {
-                return `a ${this.word}`
+                return `the ${this.word}`
             }
         } else {
             return this.word; //returns unconcat word for concat with adj by assembleNoun()
@@ -148,11 +152,15 @@ class Adjective extends Word {
         }
     }
 
-    renderAdjective() { // Similar to renderNoun() - add articleType to add indefinite vs definite articles.
-        if (this.startsWithVowel) {
-            return `an ${this.word}`;
+    renderAdjective(articleType) { // Similar to renderNoun() - add articleType to add indefinite vs definite articles.
+        if (articleType === 'indefinite') {
+            if (this.startsWithVowel) {
+                return `an ${this.word}`;
+            } else {
+                return `a ${this.word}`;
+            }
         } else {
-            return `a ${this.word}`;
+            return `the ${this.word}`;
         }
     }
 }

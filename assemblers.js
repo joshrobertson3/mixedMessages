@@ -5,14 +5,18 @@ import { pickRandom, randomBoolean, formatSentence } from "./helperFunctions.js"
 export const assembleNoun = caseType => {
     let component;
     let nounObj = dictionary.getRandomNoun();
-    //console.log(nounObj)
-    //console.log(nounObj.person);
+    let articleType;
+    if (randomBoolean()) {
+        articleType = 'definite';
+    } else {
+        articleType = 'indefinite';
+    }
     let adjRequired = randomBoolean();
-    let noun = nounObj.renderNoun(caseType, adjRequired);
+    let noun = nounObj.renderNoun(caseType, adjRequired, articleType);
     //console.log(adjRequired);
     if (adjRequired && nounObj.nounType !== 'pronoun') {
         let adjective = dictionary.getRandomAdjective();
-        component = adjective.renderAdjective() + ' ' + noun;
+        component = adjective.renderAdjective(articleType) + ' ' + noun;
     } else {
         component = noun;
     }

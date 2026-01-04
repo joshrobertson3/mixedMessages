@@ -125,17 +125,19 @@ console.log(dictionary.nouns[3]['nominative']);
 //console.log(dictionary.getSpecificWord('cat', 'noun'));
 //console.log(dependentClause());
 
-/*
-let testNoun = assembleNoun('subject');
+
+//let testNoun = assembleNoun('object');
 //console.log(testNoun);
 //console.log(testNoun.nounObj.person);
 
+/*
 let testVerb = assembleVerb(testNoun);
 console.log('testing action - assembleVerb(testNoun)',
     testVerb
 );
 */
 
+/*
 const newDocument = new Document('Testing Manual Generation', 'Joshua Robertson');
 
 newDocument.generateParagraph(4, ['compound', 'compound', 'simple', 'compound']);
@@ -162,11 +164,9 @@ console.log(
 );
 
 console.log(newDocument.renderDocument());
+*/
 
 
-
-/*
 const testDocument = new Document('Testing Random Generation', 'Joshua Robertson')
 testDocument.generateRandomDocument();
 console.log(testDocument.renderDocument());
-*/
