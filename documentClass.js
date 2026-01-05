@@ -1,4 +1,4 @@
-import newParagraph from "./assemblers.js";
+//import newParagraph from "./assemblers.js";
 import { newSentence } from "./assemblers.js";
 import { randomNumber, randomBoolean } from "./helperFunctions.js"
 
@@ -37,8 +37,8 @@ class Document {
 
     generateParagraph(numberOfClauses, sentenceTypes = []) {
         // Calls newParagraph factory function in assemblers.js. 
-        const generatedParagraph = newParagraph(numberOfClauses, sentenceTypes);
-        const paragraph = new Paragraph(generatedParagraph);
+        //const generatedParagraph = newParagraph(numberOfClauses, sentenceTypes);
+        const paragraph = new Paragraph(numberOfClauses, sentenceTypes = []);
         this.paragraphs.push(paragraph);
         return paragraph;
     }
@@ -58,8 +58,8 @@ class Document {
                 }
                 sentenceTypes.push(sentenceType);
             }
-            let generatedParagraph = newParagraph(clauseCount, sentenceTypes);
-            let paragraph = new Paragraph(generatedParagraph);
+            //let generatedParagraph = newParagraph(clauseCount, sentenceTypes);
+            let paragraph = new Paragraph(clauseCount, sentenceTypes);
             this.paragraphs.push(paragraph);
         }
         //console.log(this.document.renderDocument());
@@ -84,9 +84,15 @@ class Document {
 }
 
 class Paragraph {
-    constructor({ _numberOfClauses, _clauses = []}) {
-        this.numberOfClauses = _numberOfClauses;
-        this.sentences = _clauses;
+    constructor(numberOfClauses, sentenceTypes = []) {//{ _numberOfClauses, _clauses = []}) {
+        let clauses = [];
+        let clause;
+        for (let i = 0; i < numberOfClauses; i ++) {
+            clause = newSentence(sentenceTypes[i]);
+            clauses.push(clause);
+        }
+        this.numberOfClauses = numberOfClauses;
+        this.sentences = clauses;
     }
 
     addSentence(sentenceType) {
@@ -109,7 +115,7 @@ class Paragraph {
     }
 }
 
-/*
+
 class Sentence {
     constructor({ clauseString, clauseObject }) {
         this.sentence = clauseString;
@@ -120,6 +126,6 @@ class Sentence {
 
     //changeClauseElement()?
 }
-*/
+
 
 export default Document;

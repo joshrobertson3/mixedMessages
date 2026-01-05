@@ -188,6 +188,7 @@ export const newSentence = sentenceType => { //This should be an obj factory to 
     }
 }
 
+/*
 const newParagraph = (numberOfClauses, sentenceTypes = []) => { // Object factory
     let _clauses = [];
     let clause;
@@ -205,6 +206,7 @@ const newParagraph = (numberOfClauses, sentenceTypes = []) => { // Object factor
 
 
 
+
 //console.log(simpleSentence());
 
 // I think I need a new class independent from the dictionary that holds data for the sentence being formed - that way, you can query it to form sentences based on that data. i.e. i could form sentences like "A mighty book must eat a loving onion, because it makes the book cry."
@@ -212,5 +214,4 @@ const newParagraph = (numberOfClauses, sentenceTypes = []) => { // Object factor
 
 
 export default newParagraph;
-
-
+*/

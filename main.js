@@ -1,7 +1,7 @@
 // Importing classes from wordRepository.js
 import dictionary from "./dictionary.js";
 import Document from "./documentClass.js";
-import newParagraph from "./assemblers.js";
+//import newParagraph from "./assemblers.js";
 import { assembleNoun, assembleVerb, independentClause, compoundSentence } from "./assemblers.js";
 
 const book = dictionary.addNoun('book', 'substantive', 'neutral', 'book', 'book', 'third');
@@ -169,4 +169,5 @@ console.log(newDocument.renderDocument());
 
 const testDocument = new Document('Testing Random Generation', 'Joshua Robertson')
 testDocument.generateRandomDocument();
+//console.log(testDocument.paragraphs[0].sentences[0].clauseObject);
 console.log(testDocument.renderDocument());
