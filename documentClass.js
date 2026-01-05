@@ -97,9 +97,29 @@ class Paragraph {
     }
 
     renderParagraph() {
-        let renderedParagraph = this.sentences.join(' ');
+        //console.log(this.sentences[0]);
+        let clause;
+        let sentences = [];
+        for (let i = 0; i < this.sentences.length; i ++) {
+            clause = this.sentences[i].clauseString;
+            sentences.push(clause);
+        }
+        let renderedParagraph = sentences.join(' ');
         return renderedParagraph;
     }
 }
+
+/*
+class Sentence {
+    constructor({ clauseString, clauseObject }) {
+        this.sentence = clauseString;
+        this.clauseObject = clauseObject;
+    }
+
+    get
+
+    //changeClauseElement()?
+}
+*/
 
 export default Document;

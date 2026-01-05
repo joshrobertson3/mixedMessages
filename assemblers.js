@@ -148,40 +148,44 @@ const complexSentence = theme => {
 }
 */
 
-export const newSentence = sentenceType => {
-    let obj;
-    let clause;
+export const newSentence = sentenceType => { //This should be an obj factory to return to the paragraph method that creates a new instance of the sentence class.
+    let clauseObject;
+    let clauseString;
     let string;
     switch (sentenceType) {
             case 'simple': 
-                obj = independentClause();
-                string = obj.string;
+                clauseObject = independentClause();
+                string = clauseObject.string;
                 //console.log(`Action: newSentence(${sentenceType})`, `string:`, string);
-                clause = formatSentence(string);
-                return clause;
+                clauseString = formatSentence(string);
+                //return clause; // TO DO: Should return an object - then feed it into a Sentence class
                 break;
             case 'compound':
-                obj = compoundSentence();
-                string = obj.string;
+                clauseObject = compoundSentence();
+                string = clauseObject.string;
                 //console.log(`Action: newSentence(${sentenceType})`, `string:`, string);
-                clause = formatSentence(string);
-                return clause;
+                clauseString = formatSentence(string);
+                //return clause; // TO DO: Should return an object
                 break;
             /*
             case 'complex':
-                obj = complexSentence();
-                string = obj.string;
-                return clause;
+                clauseObject = complexSentence();
+                clauseString = clauseObject.string;
+                //return clause;
                 break;
             case 'compoundComplex':
-                obj = compoundComplexSentence();
-                string = obj.string;
-                return clause;
+                clauseObject = compoundComplexSentence();
+                clauseString = clauseObject.string;
+                //return clause;
                 break;
             */
             default:
                 throw new Error('Error! Something has gone wrong with newSentence().')
         }
+    return { //Returning object now
+        clauseString,
+        clauseObject
+    }
 }
 
 const newParagraph = (numberOfClauses, sentenceTypes = []) => { // Object factory
