@@ -1,6 +1,6 @@
 //import newParagraph from "./assemblers.js";
-import { newSentence } from "./assemblers.js";
-import { randomNumber, randomBoolean } from "./helperFunctions.js"
+import { independentClause, compoundSentence, assembleVerb, assembleNoun } from "./assemblers.js";
+import { randomNumber, randomBoolean, formatSentence } from "./helperFunctions.js"
 
 class Document {
     constructor(title, author) {
@@ -58,7 +58,7 @@ class Document {
                 }
                 sentenceTypes.push(sentenceType);
             }
-            //let generatedParagraph = newParagraph(clauseCount, sentenceTypes);
+            //let generatedParagraph = newParagraph(clauseCount, sentenceTypes); 
             let paragraph = new Paragraph(clauseCount, sentenceTypes);
             this.paragraphs.push(paragraph);
         }
@@ -88,7 +88,8 @@ class Paragraph {
         let clauses = [];
         let clause;
         for (let i = 0; i < numberOfClauses; i ++) {
-            clause = newSentence(sentenceTypes[i]);
+            const sentence = new Sentence(sentenceTypes[i]);
+            //clause = newSentence(sentenceTypes[i]);
             clauses.push(clause);
         }
         this.numberOfClauses = numberOfClauses;
@@ -96,10 +97,11 @@ class Paragraph {
     }
 
     addSentence(sentenceType) {
-        const generatedSentence = newSentence(sentenceType);
-        this.sentences.push(generatedSentence);
+        //const generatedSentence = newSentence(sentenceType);
+        const sentence = new Sentence(sentenceType);
+        this.sentences.push(sentence);
         this.numberOfClauses ++;
-        return generatedSentence;
+        return sentence;
     }
 
     renderParagraph() {
@@ -107,7 +109,7 @@ class Paragraph {
         let clause;
         let sentences = [];
         for (let i = 0; i < this.sentences.length; i ++) {
-            clause = this.sentences[i].clauseString;
+            clause = this.sentences[i].sentence; // DEBUGGING HERE
             sentences.push(clause);
         }
         let renderedParagraph = sentences.join(' ');
@@ -117,14 +119,65 @@ class Paragraph {
 
 
 class Sentence {
-    constructor({ clauseString, clauseObject }) {
+    constructor(sentenceType) {
+        let clauseObject;
+        let clauseString;
+        let string;
+            switch (sentenceType) {
+                case 'simple': 
+                    clauseObject = independentClause();
+                    string = clauseObject.string;
+                    //console.log(`Action: newSentence(${sentenceType})`, `string:`, string);
+                    clauseString = formatSentence(string);
+                    //return clause; // TO DO: Should return an object - then feed it into a Sentence class
+                    break;
+                case 'compound':
+                    clauseObject = compoundSentence();
+                    string = clauseObject.string;
+                    //console.log(`Action: newSentence(${sentenceType})`, `string:`, string);
+                    clauseString = formatSentence(string);
+                    //return clause; // TO DO: Should return an object
+                    break;
+                /*
+                case 'complex':
+                    clauseObject = complexSentence();
+                    clauseString = clauseObject.string;
+                    //return clause;
+                    break;
+                case 'compoundComplex':
+                    clauseObject = compoundComplexSentence();
+                    clauseString = clauseObject.string;
+                    //return clause;
+                    break;
+                */
+                default:
+                    throw new Error('Error! Input for sentence type was unexpected.')
+            }
         this.sentence = clauseString;
         this.clauseObject = clauseObject;
     }
 
-    get
-
     //changeClauseElement()?
+}
+
+export class Element {
+    constructor(elementType, subjectElement) {
+        //I want to be able to call both assembleNoun and assembleVerb here.
+        let elementObject;
+        if (elementType === 'nounSubject') {
+            elementObject = assembleNoun('subject');
+        } else if (elementType === 'verb') {
+            elementObject = assembleVerb(subjectElement);
+        } else if (elementType === 'nounObject') {
+            elementObject = assembleNoun('object');
+        } else {
+            throw new Error('elementType was unexpected')
+        }
+
+        this.string = elementObject.string;
+        this.elementType = elementType;
+        this.elementObject = elementObject;
+    }
 }
 
 

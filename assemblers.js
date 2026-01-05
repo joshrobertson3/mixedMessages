@@ -1,9 +1,10 @@
 import dictionary from "./dictionary.js";
+import { Element } from "./documentClass.js";
 import { pickRandom, randomBoolean, formatSentence } from "./helperFunctions.js";
 
 // Returns the subject/object of a sentence with either a random adjective attached or not
 export const assembleNoun = caseType => {
-    let component;
+    let string;
     let nounObj = dictionary.getRandomNoun();
     let articleType;
     if (randomBoolean()) {
@@ -16,18 +17,18 @@ export const assembleNoun = caseType => {
     //console.log(adjRequired);
     if (adjRequired && nounObj.nounType !== 'pronoun') {
         let adjective = dictionary.getRandomAdjective();
-        component = adjective.renderAdjective(articleType) + ' ' + noun;
+        string = adjective.renderAdjective(articleType) + ' ' + noun;
     } else {
-        component = noun;
+        string = noun;
     }
     /*
     console.log(
         `Action: assembleNoun(${caseType})`,
-        `result: { component: ${component}, caseType: ${caseType}, nounObj:`, nounObj, ' }'
+        `result: { string: ${string}, caseType: ${caseType}, nounObj:`, nounObj, ' }'
     );
     */
     return { 
-        component,
+        string,
         caseType,
         nounObj
     };
@@ -36,36 +37,39 @@ export const assembleNoun = caseType => {
 
 
 //Returns the verb of a sentence either as a regular verb or as a modal verb combination.
-export const assembleVerb = obj => {
-    let person = obj.nounObj.person;
+export const assembleVerb = subjectObj => {
+    let person = subjectObj.elementObject.nounObj.person;
     //console.log(person);
-    let component;
-    let componentType;
+    let string;
+    //let componentType; // querying whether needed
     let verbs = [];
     let verbObj = dictionary.getRandomVerb();
     verbs.push(verbObj);
-    if (verbObj['verbType'] === 'modal') {
-        componentType = 'modal';
+    console.log(`assembleVerb: verbs[0].verbType = `, verbs[0].verbType);
+    let verbType = verbs[0].verbType;
+    if (verbObj.verbType === 'modal') {
+        //componentType = 'modal';
         let auxVerbObj;
         do {
             auxVerbObj = dictionary.getRandomVerb();
             //console.log('auxVerbObj: ' + auxVerbObj['word']);
         } while (auxVerbObj['verbType'] === 'modal');
         verbs.push(auxVerbObj)
-        component = verbObj.renderVerb('firstPerson') + ' ' + auxVerbObj.renderVerb('firstPerson');
+        string = verbObj.renderVerb('firstPerson') + ' ' + auxVerbObj.renderVerb('firstPerson');
     } else {
-        componentType = 'notModal'
-        component = verbObj.renderVerb(person);
+        //componentType = 'notModal'
+        string = verbObj.renderVerb(person);
     }
     /*
     console.log(
         `Action: assembleVerb(${obj})`,
-        `result: { component: ${component}, componentType: ${componentType}, verbObj: `, verbObj, ' }'
+        `result: { string: ${string}, componentType: ${componentType}, verbObj: `, verbObj, ' }'
     );
     */
     return {
-        component,
-        componentType,
+        string,
+        //componentType,
+        verbType,
         verbs,
     } 
 }
@@ -74,20 +78,23 @@ export const assembleVerb = obj => {
 
 
 
-// Determines make up of a clause, calls relevant functions to get each component and assembles them into one string with punctuation marks.
+// Determines make up of a clause, calls relevant functions to get each string and assembles them into one string with punctuation marks.
 export const independentClause = () => {
-    const subjectObj = assembleNoun('subject');
-    //console.log('subjectObj: ', subjectObj);
-    //console.log('subjectObj[component] = ' + subjectObj['component']);
-    //console.log('subjectObj[person] = ' + subjectObj['person']);
-    const verbObj = assembleVerb(subjectObj);
-    const objectObj = assembleNoun('object');
-    let string = subjectObj['component'] + ' ' + verbObj['component'] + ' ' + objectObj['component'];
+    //const subjectObj = assembleNoun('subject'); // to delete
+    const subjectElement = new Element('nounSubject');
+    console.log('subjectElement: \n', subjectElement);
+    console.log('subjectElement.string = ' + subjectElement.string);
+    console.log(`subjectElement.elementObject.nounObj.person = `, subjectElement.elementObject.nounObj.person);
+    //const verbObj = assembleVerb(subjectObj); // to delete
+    const verbElement = new Element ('verb', subjectElement);
+    //const objectObj = assembleNoun('object'); // to delete
+    const objectElement = new Element('nounObject')
+    let string = subjectElement.string + ' ' + verbElement.string + ' ' + objectElement.string;
     return {
         string,
-        subjectObj,
-        verbObj,
-        objectObj,
+        subjectElement,
+        verbElement,
+        objectElement,
     };
 }
 
@@ -148,6 +155,7 @@ const complexSentence = theme => {
 }
 */
 
+/*Deprecated
 export const newSentence = sentenceType => { //This should be an obj factory to return to the paragraph method that creates a new instance of the sentence class.
     let clauseObject;
     let clauseString;
@@ -178,7 +186,7 @@ export const newSentence = sentenceType => { //This should be an obj factory to 
                 clauseString = clauseObject.string;
                 //return clause;
                 break;
-            */
+            
             default:
                 throw new Error('Error! Something has gone wrong with newSentence().')
         }
@@ -187,8 +195,9 @@ export const newSentence = sentenceType => { //This should be an obj factory to 
         clauseObject
     }
 }
+*/
 
-/*
+/*Deprecated 
 const newParagraph = (numberOfClauses, sentenceTypes = []) => { // Object factory
     let _clauses = [];
     let clause;
@@ -203,14 +212,6 @@ const newParagraph = (numberOfClauses, sentenceTypes = []) => { // Object factor
         _clauses,
     }
 }
-
-
-
-
-//console.log(simpleSentence());
-
-// I think I need a new class independent from the dictionary that holds data for the sentence being formed - that way, you can query it to form sentences based on that data. i.e. i could form sentences like "A mighty book must eat a loving onion, because it makes the book cry."
-
 
 
 export default newParagraph;
