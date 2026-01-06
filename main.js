@@ -170,6 +170,8 @@ console.log(newDocument.renderDocument());
 const testDocument = new Document('Testing Random Generation', 'Joshua Robertson')
 testDocument.generateRandomDocument();
 //console.log(testDocument.paragraphs[0].sentences[0].clauseObject);
-console.log(testDocument.renderDocument());
+//console.log(testDocument.paragraphs[0].
 
-//console.log(testDocument.paragraphs[0])
+
+//console.log(testDocument.paragraphs[0]);
+console.log(testDocument.renderDocument());

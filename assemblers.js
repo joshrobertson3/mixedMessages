@@ -45,7 +45,7 @@ export const assembleVerb = subjectObj => {
     let verbs = [];
     let verbObj = dictionary.getRandomVerb();
     verbs.push(verbObj);
-    console.log(`assembleVerb: verbs[0].verbType = `, verbs[0].verbType);
+    //console.log(`assembleVerb: verbs[0].verbType = `, verbs[0].verbType);
     let verbType = verbs[0].verbType;
     if (verbObj.verbType === 'modal') {
         //componentType = 'modal';
@@ -82,9 +82,9 @@ export const assembleVerb = subjectObj => {
 export const independentClause = () => {
     //const subjectObj = assembleNoun('subject'); // to delete
     const subjectElement = new Element('nounSubject');
-    console.log('subjectElement: \n', subjectElement);
-    console.log('subjectElement.string = ' + subjectElement.string);
-    console.log(`subjectElement.elementObject.nounObj.person = `, subjectElement.elementObject.nounObj.person);
+    //console.log('subjectElement: \n', subjectElement);
+    //console.log('subjectElement.string = ' + subjectElement.string);
+    //console.log(`subjectElement.elementObject.nounObj.person = `, subjectElement.elementObject.nounObj.person);
     //const verbObj = assembleVerb(subjectObj); // to delete
     const verbElement = new Element ('verb', subjectElement);
     //const objectObj = assembleNoun('object'); // to delete

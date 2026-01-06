@@ -86,11 +86,11 @@ class Document {
 class Paragraph {
     constructor(numberOfClauses, sentenceTypes = []) {//{ _numberOfClauses, _clauses = []}) {
         let clauses = [];
-        let clause;
+        let sentence;
         for (let i = 0; i < numberOfClauses; i ++) {
-            const sentence = new Sentence(sentenceTypes[i]);
+            sentence = new Sentence(sentenceTypes[i]);
             //clause = newSentence(sentenceTypes[i]);
-            clauses.push(clause);
+            clauses.push(sentence);
         }
         this.numberOfClauses = numberOfClauses;
         this.sentences = clauses;
@@ -109,7 +109,7 @@ class Paragraph {
         let clause;
         let sentences = [];
         for (let i = 0; i < this.sentences.length; i ++) {
-            clause = this.sentences[i].sentence; // DEBUGGING HERE
+            clause = this.sentences[i].sentence;
             sentences.push(clause);
         }
         let renderedParagraph = sentences.join(' ');
@@ -126,33 +126,23 @@ class Sentence {
             switch (sentenceType) {
                 case 'simple': 
                     clauseObject = independentClause();
-                    string = clauseObject.string;
-                    //console.log(`Action: newSentence(${sentenceType})`, `string:`, string);
-                    clauseString = formatSentence(string);
-                    //return clause; // TO DO: Should return an object - then feed it into a Sentence class
                     break;
                 case 'compound':
                     clauseObject = compoundSentence();
-                    string = clauseObject.string;
-                    //console.log(`Action: newSentence(${sentenceType})`, `string:`, string);
-                    clauseString = formatSentence(string);
-                    //return clause; // TO DO: Should return an object
                     break;
                 /*
                 case 'complex':
                     clauseObject = complexSentence();
-                    clauseString = clauseObject.string;
-                    //return clause;
                     break;
                 case 'compoundComplex':
                     clauseObject = compoundComplexSentence();
-                    clauseString = clauseObject.string;
-                    //return clause;
                     break;
                 */
                 default:
                     throw new Error('Error! Input for sentence type was unexpected.')
             }
+        string = clauseObject.string;
+        clauseString = formatSentence(string);
         this.sentence = clauseString;
         this.clauseObject = clauseObject;
     }
