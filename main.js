@@ -1,8 +1,8 @@
 // Importing classes from wordRepository.js
 import dictionary from "./dictionary.js";
 import Document from "./documentClass.js";
-//import newParagraph from "./assemblers.js";
-import { assembleNoun, assembleVerb, independentClause, compoundSentence } from "./assemblers.js";
+
+
 
 const book = dictionary.addNoun('book', 'substantive', 'neutral', 'book', 'book', 'third');
 const dog = dictionary.addNoun('dog', 'substantive', 'neutral', 'dog', 'dog', 'third');
