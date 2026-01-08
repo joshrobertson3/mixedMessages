@@ -144,6 +144,7 @@ class Sentence {
         string = clauseObject.string;
         clauseString = formatSentence(string);
         this.sentence = clauseString;
+        this.sentenceType = sentenceType;
         this.clauseObject = clauseObject;
     }
 

@@ -1,0 +1,30 @@
+{
+  "name": "mixed-messages",
+  "version": "1.0.0",
+  "description": "A JavaScript-based text and document generator that leverages object-oriented programming to create structured documents with grammatically coherent, randomised sentences.",
+  "keywords": [
+    "text-generation",
+    "document-generation",
+    "grammar",
+    "nlp",
+    "first-project"
+  ],
+  "homepage": "https://github.com/joshrobertson3/mixedMessages#readme",
+  "bugs": {
+    "url": "https://github.com/joshrobertson3/mixedMessages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshrobertson3/mixedMessages.git"
+  },
+  "license": "MIT",
+  "author": "Joshua Robertson",
+  "type": "module",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

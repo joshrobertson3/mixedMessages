@@ -174,4 +174,21 @@ testDocument.generateRandomDocument();
 
 
 //console.log(testDocument.paragraphs[0]);
+let testSentenceType = testDocument.paragraphs[0].sentences[0].sentenceType;
+console.log(testSentenceType);
+
+const testing = type => {
+    if (type === 'simple') {
+        console.log(testDocument.paragraphs[0].sentences[0].clauseObject.subjectElement)
+    } else {
+        console.log(testDocument.paragraphs[0].sentences[0].clauseObject.clauseObj1.subjectElement)
+    }
+}
+
+testing(testSentenceType);
+
+
+
+
+
 console.log(testDocument.renderDocument());
