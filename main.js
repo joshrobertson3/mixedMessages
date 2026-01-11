@@ -172,8 +172,8 @@ testDocument.generateRandomDocument();
 //console.log(testDocument.paragraphs[0].sentences[0].clauseObject);
 //console.log(testDocument.paragraphs[0].
 
-
-//console.log(testDocument.paragraphs[0]);
+/*
+console.log(testDocument.paragraphs[0]);
 let testSentenceType = testDocument.paragraphs[0].sentences[0].sentenceType;
 console.log(testSentenceType);
 
@@ -186,7 +186,7 @@ const testing = type => {
 }
 
 testing(testSentenceType);
-
+*/
 
 
 
